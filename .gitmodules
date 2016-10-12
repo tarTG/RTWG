@@ -1,0 +1,3 @@
+[submodule "3rdParty/RTplatec"]
+	path = 3rdParty/RTplatec
+	url = git@github.com:tarTG/RTplatec.git
