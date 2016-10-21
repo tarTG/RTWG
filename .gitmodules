@@ -1,3 +1,6 @@
 [submodule "3rdParty/RTplatec"]
 	path = 3rdParty/RTplatec
-	url = git@github.com:tarTG/RTplatec.git
+	url = https://github.com/tarTG/RTplatec.git
+[submodule "3rdParty/--force"]
+	path = 3rdParty/--force
+	url = https://github.com/tarTG/RTplatec.git
