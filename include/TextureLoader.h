@@ -19,6 +19,7 @@
 #include <sstream>
 #include <iostream>
 #include <IL/il.h>
+#include <vector>
 
 class TextureLoader {
 public:
