@@ -40,3 +40,6 @@ cd ..
 cd ..
 cd ..
     
+
+#install DevIL
+apt-get install libdevil-dev

@@ -8,7 +8,17 @@ message(STATUS "~~~ ${PROJECT_NAME} - v${PROJECT_VERSION} ~~~")
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
+find_package(PkgConfig REQUIRED)
 
+pkg_search_module(GLFW REQUIRED glfw3)
+find_package(DevIL REQUIRED)
+find_package(X11 REQUIRED)
+find_package(AntTweakBar REQUIRED)
+find_package(OpenGL REQUIRED)
+
+include_directories("${GLFW_INCLUDE_DIRS}" )
+include_directories("${ANTTWEAKBAR_INCLUDE_DIR}" )
+include_directories("${IL_INCLUDE_DIR}" )
 
 include_directories("include" )
 include_directories("3rdParty" )
