@@ -19,29 +19,12 @@
 #include "inputHandler.h"
 #include "RendToTex.h"
 #include <vector>
-
+#include <memory>
+#include "RTplatec/include/lithosphere.hpp"
 class simulation 
 {
 public:
-    simulation(unsigned int texureWidth, unsigned int textureHeight);
-
-    void init();
-    
-    void initLithosphere( float sea_level, float _folding_ratio, uint32_t aggr_ratio_abs, 
-                         float aggr_ratio_rel, uint32_t _max_plates, float terrainNoiseRoughness);
-    
-    GLuint getTextureID(DataType type);
-    
-    void update();
-    
-     void exit();
-private:
-    
-    void initGUIElements();
-    
-    static constexpr int getDataTypeSize(){ return static_cast<int>(DataType::CLIMAT); };
-    
-    enum DataType 
+     enum DataType 
     {
         ROCK = 0, 
         SOIL = 1,
@@ -52,6 +35,26 @@ private:
         ICE = 6,
         CLIMAT = 7
     };
+    simulation(unsigned int texureWidth, unsigned int textureHeight);
+
+    void init();
+    
+    void initLithosphere( float sea_level, float _folding_ratio, uint32_t aggr_ratio_abs, 
+                         float aggr_ratio_rel, uint32_t _max_plates, float terrainNoiseRoughness);
+    
+    GLuint getTextureID(simulation::DataType type);
+    
+    void update();
+    
+     void exit();
+    DataType getCurrentDisplay() const;
+private:
+    
+    void initGUIElements();
+    
+    static constexpr int getDataTypeSize(){ return static_cast<int>(DataType::CLIMAT); };
+    
+
     TwBar* parameterBar, *activationBar, *general ;
     std::vector<RendToTex> v_texData;
     unsigned int sourceBuffer = 0;
@@ -60,6 +63,7 @@ private:
     GLuint vao, windNoiseID;
     std::unique_ptr<lithosphere> ground;
    long lastSeed;
+   DataType currentDisplay = CLIMAT;
 
 };
 

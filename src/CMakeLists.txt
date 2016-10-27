@@ -8,7 +8,7 @@ TextureLoader.cpp
 display2D.cpp
 simulation.cpp
 )
-SET(SHADER_PATH "${PROJECT_DIR}/Shader/")
+SET(SHADER_PATH "${PROJECT_SOURCE_DIR}/Shader/")
 ADD_DEFINITIONS(-DSHADER_PATH="${SHADER_PATH}")
 
 target_link_libraries(rtwg RTplatec  ${OPENGL_LIBRARIES} GL3W  ${GLFW_STATIC_LIBRARIES}  

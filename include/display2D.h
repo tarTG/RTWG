@@ -14,15 +14,22 @@
 #ifndef DISPLAY2D_H
 #define DISPLAY2D_H
 
+#include "GL3W/gl3w.h"
+#include <GLFW/glfw3.h>
+
+#include "ShaderLoader.h"
+
+
 class display2D {
 public:
-    display2D(unsigned int windowWidht, unsigned int window);
+    display2D(const std::string& shaderPath);
 
-    void render();
+    void render(std::array<GLint,2> windowDimensions, unsigned int currentSelection, GLuint textureID);
    
     void exit();
 private:
-
+    GLuint displayProgram, vao;
+    
 };
 
 #endif /* DISPLAY2D_H */

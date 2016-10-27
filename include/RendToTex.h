@@ -27,6 +27,7 @@
 class RendToTex 
 {
 public:
+    RendToTex() = default;
     RendToTex(unsigned int _sourceBuffer, unsigned int _destinationBuffer,const std::string& shaderPath,   unsigned int textureWidth, unsigned int textureHeight, const GLuint colorFormat,const GLuint interpolation = GL_LINEAR);
     
     void setUniforms(const std::vector<std::pair<float,std::string>>& uniforms);

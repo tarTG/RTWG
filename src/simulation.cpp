@@ -14,10 +14,9 @@
 #include "simulation.h"
 
 
-simulation::simulation(unsigned int textureWidth, unsigned int textureHeight) : textureWidth(textureWidth),textureHeight(textureHeight)
-
+simulation::simulation(unsigned int textureWidth, unsigned int textureHeight) : textureWidth(textureWidth),textureHeight(textureHeight),
+        v_texData(std::vector<RendToTex>(getDataTypeSize()+1))
 {
-    v_texData.reserve(getDataTypeSize());
 }
 
 
@@ -63,7 +62,7 @@ void simulation::init()
     windNoiseID = TextureLoader::generateNoiseTexture(textureWidth, textureHeight,rand(),v_texData.at(WIND).getParameterValue("windNoiseRoughness"),v_texData.at(WIND).getParameterValue("windNoiseTurbulence"));
 
      //init climat 
-    v_texData.at(CLIMAT) = RendToTex(sourceBuffer,destinationBuffer,std::string(SHADER_PATH )  + "simulation/climat/wind_Sim",textureWidth,textureHeight,GL_RGB);
+    v_texData.at(CLIMAT) = RendToTex(sourceBuffer,destinationBuffer,std::string(SHADER_PATH )  + "simulation/climat/climat",textureWidth,textureHeight,GL_RGB);
     
 
     glBindVertexArray(0);
@@ -72,19 +71,21 @@ void simulation::init()
 void simulation::initGUIElements()
 {
     TwEnumVal twdisplayEnum[] = { {DataType::ROCK, "Rock"}, {DataType::SOIL, "Soil"}, {DataType::WATER, "Water"}, {DataType::TEMP, "Temp"}, 
-                                  {DataType::MOIST, "Moist"}, {DataType::WIND, "Wind"}, {DataType::ICE, "ice"}, {DataType::CLIMAT, "RawData"}};
+                                  {DataType::MOIST, "Moist"}, {DataType::WIND, "Wind"}, {DataType::ICE, "ice"}, {DataType::CLIMAT, "Climat"}};
     TwType twDisplay;
     // Defining season enum type
-    twDisplay = TwDefineEnum("SeasonType", twdisplayEnum, 9);
+    twDisplay = TwDefineEnum("SeasonType", twdisplayEnum, 8);
     parameterBar = inputHandler::createNewBar("Parameters","position='8 8' size='200 400'"); 
     activationBar = inputHandler::createNewBar("Activation","position='208 8' size='200 400'"); 
     general = inputHandler::createNewBar("General","position='408 8' size='200 400'"); 
+    
+    TwAddVarRW(general, "Current Display", twDisplay, &currentDisplay, NULL);
 
 }
 
 void simulation::initLithosphere(float sea_level, float _folding_ratio, uint32_t aggr_ratio_abs, float aggr_ratio_rel, uint32_t _max_plates, float terrainNoiseRoughness)
 {
-    ground = std::unique_ptr<lithosphere>(new lithosphere(lastSeed, textureWidth, textureHeight,seaLevel,_folding_ratio,aggr_ratio_absaggr_ratio_rel,_max_plates,terrainNoiseRoughness));
+    ground = std::unique_ptr<lithosphere>(new lithosphere(lastSeed, textureWidth, textureHeight,sea_level,_folding_ratio,aggr_ratio_abs,aggr_ratio_rel,_max_plates,terrainNoiseRoughness));
    glClampColor(0x891A, GL_FALSE);
     glClampColor(GL_CLAMP_READ_COLOR, GL_FALSE);
     glClampColor(0x891B, GL_FALSE);
@@ -108,7 +109,7 @@ void simulation::initLithosphere(float sea_level, float _folding_ratio, uint32_t
 }
 GLuint simulation::getTextureID(DataType type)
 {
-    return v_texData.at(type).getDestinationTexture();
+    return v_texData.at(type).getSourceTexture();
 }
 
 
@@ -171,4 +172,9 @@ void simulation::exit()
 {
     glDeleteVertexArrays(1,&vao);
     std::for_each(v_texData.begin(), v_texData.end(),[](auto& data){data.exit();});
+}
+
+simulation::DataType simulation::getCurrentDisplay() const
+{
+    return currentDisplay;
 }
