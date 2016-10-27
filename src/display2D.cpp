@@ -5,22 +5,25 @@
  */
 
 /* 
- * File:   main.cpp
+ * File:   display2D.cpp
  * Author: tg
- *
- * Created on 27. Oktober 2016, 10:56
- */
-
-#include <cstdlib>
-
-using namespace std;
-
-/*
  * 
+ * Created on 27. Oktober 2016, 10:55
  */
-int main(int argc, char** argv)
+
+#include "display2D.h"
+
+display2D::display2D(unsigned int windowWidht, unsigned int window)
 {
 
-    return 0;
+}
+void display2D::render()
+{
+
+}
+
+void display2D::exit()
+{
+
 }
 

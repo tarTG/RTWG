@@ -29,12 +29,12 @@ public:
     
     static ILuint load2DTexture(const std::string& fileName, const ILint INcolorFormat, const ILint INvalueFormat);
     
-    static GLuint loadEmpty2DTexture(const int width, const int lenght, const GLuint OUTcolorFormat, const GLuint OUTvalueFormat, const GLuint interplolation = GL_NEAREST);    
+    static GLuint loadEmpty2DTexture(const int width, const int height, const GLuint OUTcolorFormat, const GLuint OUTvalueFormat, const GLuint interplolation = GL_NEAREST);    
     
     static GLuint load2DTextureArray(const std::vector<std::string>& fileNames, const GLuint OUTcolorFormat, const GLuint OUTvalueFormat,
                                                                 const ILint INcolorFormat, const ILint INvalueFormat);
     
-    static GLuint generateNoiseTexture(const int width, const int lenght,const int seed, const float roughness,const int turbulence);  
+    static GLuint generateNoiseTexture(const int width, const int height,const int seed, const float roughness,const int turbulence);  
     
   static ILuint SaveTexture(ILuint Width, ILuint Height, std::string FileName, ILuint Texture);
 private:

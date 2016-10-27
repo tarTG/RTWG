@@ -34,7 +34,7 @@ public:
      * @param description - Name of the bar
      * @return referenze to the Bar. Destruction is handled in exit.
      */
-    TwBar* createNewBar(const std::string& description);
+    static TwBar* createNewBar(const std::string& name, const std::string& description);
     
     /**
      * update all anttweak bars

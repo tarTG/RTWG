@@ -12,6 +12,7 @@
  */
 
 #include <vector>
+#include <deque>
 #include "cstring"
 
 #include "RendToTex.h"
@@ -46,6 +47,10 @@ RendToTex::RendToTex(unsigned int _sourceBuffer, unsigned int _destinationBuffer
     reset();    
 }
 
+void RendToTex::setUniforms(const std::vector<std::pair<float, std::string> >& uniforms)
+{
+    v_Uniforms = std::move(uniforms);
+}
 
 
 
@@ -214,6 +219,20 @@ void RendToTex::setParameterValue(const std::string& parameter, float value)
 
 }
 
+float RendToTex::getParameterValue(const std::string& parameter)
+{
+    auto itr = std::find_if(v_Uniforms.begin(),v_Uniforms.end(),[&](auto val){return val.second.compare(parameter) == 0;});
+    if(itr != v_Uniforms.end())
+    {
+        return itr->first;
+    }
+    else
+    {
+        return 0; //TODO: here we need an exception        
+    }
+}
+
+
 ILuint RendToTex::prepareExport()
 {
     ilInit();
@@ -254,7 +273,6 @@ ILuint RendToTex::prepareExport()
     ILuint id;
         ilGenImages(1, &id);
 
-    // wybranie biezacego obrazu
     ilBindImage(id);
     ilTexImage(textureWidth,textureHeight,1,3,IL_RGB,IL_FLOAT,imgData.data());
     

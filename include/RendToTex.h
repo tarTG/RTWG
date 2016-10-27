@@ -14,10 +14,12 @@
 #ifndef RENDTOTEX_H
 #define RENDTOTEX_H
 
+
+#include "GL3W/gl3w.h"
 #include <array>
 #include <string>
 #include <vector>
-#include "GL3W/gl3w.h"
+
 #include <AntTweakBar.h>
 #include "ShaderLoader.h"
 #include "TextureLoader.h"
@@ -48,6 +50,8 @@ public:
     void setTexture(const float* data);
     
     void setParameterValue(const std::string& parameter, float value);
+    
+    float getParameterValue(const std::string& parameter);
     
     float* getTexture();
 

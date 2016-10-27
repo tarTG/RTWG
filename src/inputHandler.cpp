@@ -72,9 +72,11 @@ inputHandler::inputHandler(GLFWwindow* window) : window(window)
     glfwSetCharCallback(window,charCallback);
 }
 
-TwBar* inputHandler::createNewBar(const std::string& description) 
+TwBar* inputHandler::createNewBar(const std::string& name, const std::string& description)
 {
-    return TwNewBar(description.c_str());
+    TwBar* bar =  TwNewBar(name.c_str());
+    TwDefine(std::string(name +" " +  description).c_str()); 
+    return bar;
 }
 
 
