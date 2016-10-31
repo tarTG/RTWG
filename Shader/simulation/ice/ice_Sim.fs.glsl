@@ -15,7 +15,7 @@ layout (binding = 6) uniform sampler2D ice;
 
 out vec3 color;
 
-uniform float iceTemperature = -0.3;
+uniform float iceTemperature;
 
 
 vec3 getTexValue(sampler2D tex, float x, float y)
@@ -73,6 +73,6 @@ void main()
 
        newIce = newIce + v;
         newIce = clamp(newIce,0.0,1.0);
-     color = vec3(newIce,melt ,0.0);
+     color = vec3(newIce,melt ,1.00);
 
 }

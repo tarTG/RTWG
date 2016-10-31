@@ -42,11 +42,15 @@ public:
     void initLithosphere( float sea_level, float _folding_ratio, uint32_t aggr_ratio_abs, 
                          float aggr_ratio_rel, uint32_t _max_plates, float terrainNoiseRoughness);
     
-    GLuint getTextureID(simulation::DataType type);
+    GLuint getTextureID(const simulation::DataType type);
     
     void update();
     
      void exit();
+     
+     void restart();
+     
+     void newWorld();
     DataType getCurrentDisplay() const;
 private:
     
@@ -64,6 +68,11 @@ private:
     std::unique_ptr<lithosphere> ground;
    long lastSeed;
    DataType currentDisplay = CLIMAT;
+    bool enable_tectonic = false; //bool for enabling/disabling tectonic
+    float tectonicSeaLevel,terrainNoiseRoughness;
+    float lastSeaLevel;
+    
+
 
 };
 

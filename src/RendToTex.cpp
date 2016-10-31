@@ -17,10 +17,6 @@
 
 #include "RendToTex.h"
 
-void TW_CALL CBreset(void *clientData)
-{ 
-    static_cast<RendToTex*>(clientData)->reset();
-}
 
 RendToTex::RendToTex(unsigned int _sourceBuffer, unsigned int _destinationBuffer, const std::string& shaderPath, unsigned int textureWidth, unsigned int textureHeight, const GLuint colorFormat, const GLuint interpolation)
             : sourceBuffer(_sourceBuffer), destinationBuffer(_destinationBuffer), textureWidth(textureWidth), textureHeight(textureHeight), colorFormat(colorFormat), enable(true)
@@ -90,9 +86,9 @@ void RendToTex::generateActivationBar(TwBar* bar, const std::string& subSectionN
 {
     std::string s= "group='" + subSectionName + "' ";
     std::string name_1 = "Enable " + subSectionName;
-    TwAddVarRW(bar,name_1.c_str(),TW_TYPE_BOOL32,&enable,s.c_str() );
+    TwAddVarRW(bar,name_1.c_str(),TW_TYPE_BOOLCPP,&enable,s.c_str() );
     std::string name_2 = "Reset " + subSectionName;
-    TwAddButton(bar,name_2.c_str(),CBreset,this,s.c_str());
+    TwAddButton(bar,name_2.c_str(),[](void* clientData){static_cast<RendToTex*>(clientData)->reset();},this,s.c_str());
 }
 
 
@@ -192,6 +188,7 @@ void RendToTex::exit()
 {
     glDeleteProgram(shaderID);
     glDeleteBuffers(1,&pixelBuffer);
+   glDeleteBuffers(2,&fboBuffer[0]);
     glDeleteTextures(2,&textureBuffer[0]);
 }
 
@@ -280,5 +277,10 @@ ILuint RendToTex::prepareExport()
 
     
     return id;
+}
+
+void RendToTex::setEnable(GLboolean enable)
+{
+    this->enable = enable;
 }
 

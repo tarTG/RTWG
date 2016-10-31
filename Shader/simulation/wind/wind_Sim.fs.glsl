@@ -20,7 +20,7 @@ layout (binding = 7) uniform sampler2D noiseTex;
 uniform float distorsionFaktor = 1.0;
 uniform float globelWindFaktor = 1.0;
 uniform float localPressureFaktor = 1.0;
-uniform float timeFactor = 0.0;
+uniform float timeFactorWind = 0.0;
 uniform float windspeed = 0.0;
 
 out vec3 color;
@@ -29,7 +29,7 @@ out vec3 color;
 
 float getNoiseValue(vec2 coord)
 {
-    return (texture2D(noiseTex,((gl_FragCoord.xy )/textureSize(noiseTex,0)+coord)+vec2(sign((gl_FragCoord.y/textureSize(noiseTex,0).y)-0.5)*timeFactor*windspeed,0.0)).x * 2) -1;
+    return (texture2D(noiseTex,((gl_FragCoord.xy )/textureSize(noiseTex,0)+coord)+vec2(sign((gl_FragCoord.y/textureSize(noiseTex,0).y)-0.5)*timeFactorWind,0.0)).x * 2) -1;
 }
 
 vec3 getTexValue(sampler2D tex, float x, float y)
@@ -52,7 +52,7 @@ float getGround(float x, float y)
 float calculatePressure(vec2 dir)
 {
     float pressure = (-getTexValue(temp,dir.x, dir.y).x +1.0) + 1.0-( getTexValue(moist,dir.x, dir.y).x ) ;
-    pressure += 1/(getGround(dir.x, dir.y).x + getTexValue(water,dir.x, dir.y).x) *15;
+    pressure -= 1/(getGround(dir.x, dir.y).x + getTexValue(water,dir.x, dir.y).x) *15;
     
     return pressure/3;
 }

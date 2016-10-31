@@ -27,7 +27,6 @@ int main(int argc, char** argv)
 {
     float frameTime; //current frame time
     bool enable_tectonic = true; //bool for enabling/disabling tectonic
-    bool renderAgeMap = false; //bool for enabling/disabling age map rendering
     int windowWidth = 800, windowHeight= 600; //start values for window dimensions
     int textureWidth = 800, textureHeight= 600; 
     srand(time(NULL)); //initialize random number generator
@@ -35,7 +34,7 @@ int main(int argc, char** argv)
     //generate a new lithosphere.
 
     //initalize rendering
-    std::unique_ptr<simpleRender> render = std::make_unique<simpleRender>(windowWidth,windowHeight,"RTplatec");
+    std::unique_ptr<simpleRender> render = std::make_unique<simpleRender>(windowWidth,windowHeight,"RTWG");
     
     if(render->init() != 0) //if something faild
     {

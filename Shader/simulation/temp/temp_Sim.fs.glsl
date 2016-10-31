@@ -16,9 +16,8 @@ layout (binding = 6) uniform sampler2D ice;
 
 uniform float latFactor = 2.0;
 uniform float sunAngle = 0.0;
-uniform float waterCooldown = 1.0;
 uniform float heightCooldown = 1.0;
-uniform float timeFactor = 1.0;
+uniform float timeFactorTemp = 1.0;
 uniform float rotationSpeed = 1.0;
 uniform float DayNightFactor = 1.0;
 
@@ -54,7 +53,7 @@ float diffuse( float h1, float x, float y)
 
 float getDayNightValue(float temperature)
 {
-    float x = gl_FragCoord.x/(textureSize(temp,0)).x * PI* 2 - (timeFactor*rotationSpeed);
+    float x = gl_FragCoord.x/(textureSize(temp,0)).x * PI* 2 - (timeFactorTemp);
     float sunlight = sin(PI* 0.5 * cos(x))*0.7 +0.5 ;
     if( (gl_FragCoord.y+ sunAngle)/textureSize(temp,0).y < sunlight)
         return temperature;

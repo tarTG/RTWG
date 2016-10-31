@@ -59,6 +59,7 @@ public:
         void reset();
         
     ILuint prepareExport();
+        void setEnable(GLboolean enable);
     
 private:
     std::array<GLuint,2> textureBuffer;

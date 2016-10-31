@@ -42,7 +42,7 @@ float thermal_erosion( float h1, float x, float y)
 
     float h2 = getTexValue(rock, x, y).x;
     float diff = 0.0; 
-    if(abs(h2-h1) <  max_therm_limit && abs(h2-h1) >  min_therm_limit && getTexValue(water, 0, 0).x < 0.01)
+    if(abs(h2-h1) <  max_therm_limit && abs(h2-h1) >  min_therm_limit && getTexValue(water, 0, 0).x < 0.05)
     {
         diff = (h2-h1)/8.0;
     }
