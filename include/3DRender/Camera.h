@@ -7,7 +7,7 @@
 
 #ifndef CAMARAHANDLER_H
 #define	CAMARAHANDLER_H
-
+ #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 
@@ -27,7 +27,7 @@ public:
     
     void SetAspect(double aspect);
     
-    void Update(u_int64_t time);
+    void Update(uint64_t time);
     
     void SetPitch(double degrees);
     
@@ -57,8 +57,8 @@ public:
     
 private:
     
-    u_int32_t viewport_x, viewport_y;
-    u_int32_t window_width, window_heigth;
+    uint32_t viewport_x, viewport_y;
+    uint32_t window_width, window_heigth;
     
     double aspect, field_of_view, near_clip,far_clip;
     

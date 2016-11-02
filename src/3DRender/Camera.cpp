@@ -12,7 +12,7 @@
 #include "Camera.h"
 
 
-void camaraHandler::Update(u_int64_t time)
+void camaraHandler::Update(uint64_t time)
 {
     camera_direction = glm::normalize(camera_look_at - camera_position);
     
