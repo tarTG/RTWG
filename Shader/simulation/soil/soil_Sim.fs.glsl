@@ -100,8 +100,7 @@ void main() {
     }*/
 
 //        g.x = max(0.0,g.x) ;
-        g.z = g.y;
-        g.y = getTexValue(soil, 0.0, 0.0).y;
+
     color =  g;
 
  

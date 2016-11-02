@@ -34,7 +34,7 @@ int main(int argc, char** argv)
     //generate a new lithosphere.
 
     //initalize rendering
-    std::unique_ptr<simpleRender> render = std::make_unique<simpleRender>(windowWidth,windowHeight,"RTWG");
+    std::unique_ptr<simpleRender> render = std::make_unique<simpleRender>(windowWidth,windowHeight,"");
     
     if(render->init() != 0) //if something faild
     {
@@ -67,7 +67,7 @@ int main(int argc, char** argv)
 
          sim->update();
          disp->render({windowWidth,windowHeight},sim->getCurrentDisplay(),sim->getTextureID(sim->getCurrentDisplay()));
-                  input->update(); //handle input
+          input->update(); //handle input
 
          
          
@@ -75,7 +75,10 @@ int main(int argc, char** argv)
 
         //calculate frame time
         frameTime = 1.f/(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - timeBeforeLoop).count()/1000.f);        // the difference
-  
+        
+        std::ostringstream ss;
+        ss << "RTWG " << frameTime;
+        glfwSetWindowTitle(render->getWindow(),ss.str().c_str());
     }
     
 

@@ -54,6 +54,8 @@ public:
     DataType getCurrentDisplay() const;
 private:
     
+    void saveTextures();
+    
     void initGUIElements();
     
     static constexpr int getDataTypeSize(){ return static_cast<int>(DataType::CLIMAT); };

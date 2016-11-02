@@ -29,7 +29,7 @@ vec3 getTexValue(sampler2D tex, float x, float y)
 
 vec3 renderHeightMap(float c)
 {
-    const float COLOR_STEP=	1.0f;
+    const float COLOR_STEP=	0.5f;
     vec3 color = vec3(0.0);
     if (c < 0.5)
         color = vec3(0.0, 0.0, 0.25 + 1.5 * c);

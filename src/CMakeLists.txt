@@ -8,9 +8,17 @@ TextureLoader.cpp
 display2D.cpp
 simulation.cpp
 )
+
+add_subdirectory("3DRender")
+
+
 SET(SHADER_PATH "${PROJECT_SOURCE_DIR}/Shader/")
 ADD_DEFINITIONS(-DSHADER_PATH="${SHADER_PATH}")
 
-target_link_libraries(rtwg RTplatec  ${OPENGL_LIBRARIES} GL3W  ${GLFW_STATIC_LIBRARIES}  
+SET(OUTPUT_PATH "${PROJECT_SOURCE_DIR}/outputIMG/")
+ADD_DEFINITIONS(-DOUTPUT_PATH="${OUTPUT_PATH}")
+
+
+target_link_libraries(rtwg RTplatec rtwg3D ${OPENGL_LIBRARIES} GL3W  ${GLFW_STATIC_LIBRARIES}  
                          ${IL_LIBRARIES}    ${ILU_LIBRARIES}   ${ILUT_LIBRARIES}
                     ${ANTTWEAKBAR_LIBRARY} ${LIBNOISE_LIBRARIES}  ${X11_LIBRARIES})

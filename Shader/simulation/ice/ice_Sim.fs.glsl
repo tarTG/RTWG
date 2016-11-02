@@ -73,6 +73,6 @@ void main()
 
        newIce = newIce + v;
         newIce = clamp(newIce,0.0,1.0);
-     color = vec3(newIce,melt ,1.00);
+     color = vec3(newIce,melt ,0.00);
 
 }

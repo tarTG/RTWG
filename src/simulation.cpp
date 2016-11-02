@@ -99,7 +99,7 @@ void simulation::initGUIElements()
 
    TwAddButton(general,"Restart",[](void *clientData){static_cast<simulation*>(clientData)->restart();},this,"help='Restart this world.'  ");
    TwAddButton(general,"New World",[](void *clientData){static_cast<simulation*>(clientData)->newWorld();},this,"help='Create a new World.'  ");
-    
+   TwAddButton(general,"Export",[](void *clientData){static_cast<simulation*>(clientData)->saveTextures();},this,"help='Export all textures.'  ");   
 }
 
 void simulation::initLithosphere(float sea_level, float _folding_ratio, uint32_t aggr_ratio_abs, float aggr_ratio_rel, uint32_t _max_plates, float terrainNoiseRoughness)
@@ -126,19 +126,20 @@ void simulation::initLithosphere(float sea_level, float _folding_ratio, uint32_t
 
     auto lam = [](void *clientData)
     {
-        if(static_cast<simulation*>(clientData)->enable_tectonic == false)
+         simulation* tmpPointer = static_cast<simulation*>(clientData);
+        if(tmpPointer->enable_tectonic == false)
         {
-            static_cast<simulation*>(clientData)->lastSeaLevel = static_cast<simulation*>(clientData)->v_texData[WATER].getParameterValue("sea_level");
-            static_cast<simulation*>(clientData)->v_texData.at(WATER).setParameterValue("sea_level",0.0);
-            static_cast<simulation*>(clientData)->v_texData.at(WATER).reset();
-            static_cast<simulation*>(clientData)->v_texData.at(WATER).setEnable(false);
-            static_cast<simulation*>(clientData)->enable_tectonic = true;            
+            tmpPointer->lastSeaLevel = tmpPointer->v_texData[WATER].getParameterValue("sea_level");
+            tmpPointer->v_texData.at(WATER).setParameterValue("sea_level",0.0);
+            tmpPointer->v_texData.at(WATER).reset();
+            tmpPointer->v_texData.at(WATER).setEnable(false);
+            tmpPointer->enable_tectonic = true;            
         }
         else
         {
-            static_cast<simulation*>(clientData)->v_texData.at(WATER).setParameterValue("sea_level",static_cast<simulation*>(clientData)->lastSeaLevel);
-            static_cast<simulation*>(clientData)->v_texData.at(WATER).setEnable(true);
-            static_cast<simulation*>(clientData)->enable_tectonic = false;          
+            tmpPointer->v_texData.at(WATER).setParameterValue("sea_level",tmpPointer->lastSeaLevel);
+            tmpPointer->v_texData.at(WATER).setEnable(true);
+            tmpPointer->enable_tectonic = false;          
         }
 
     };
@@ -253,4 +254,19 @@ void simulation::exit()
 simulation::DataType simulation::getCurrentDisplay() const
 {
     return currentDisplay;
+}
+
+
+void simulation::saveTextures()
+{
+    int i= 0;
+    std::vector<std::string> names = {"ROCK"," SOIL "," WATER","TEMP","MOIST","WIND","ICE","Climat"};
+    for(auto& val : v_texData)
+    {
+        ILuint index = val.prepareExport();
+        TextureLoader::SaveTexture(textureWidth,textureHeight,std::string(OUTPUT_PATH) + names.at(i) + "_data.png",index);
+        ++i;
+        ilDeleteImage(index);
+    }
+
 }

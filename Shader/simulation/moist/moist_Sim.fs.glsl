@@ -101,17 +101,10 @@ void main()
   new_moist = new_moist  + diffuse(new_moist, 0.0, 1.0) + diffuse(new_moist, 0.0, -1.0) ;
    new_moist = new_moist + diffuse(new_moist, 1.0, 0.0) + diffuse(new_moist, - 1.0, 0.0) ;
 
-    //save flows in yz of moist
-        vec3 wa1 = getTexValue(water, 1,0);
-        vec3 wa2 = getTexValue(water, 0,1);
-        vec3 wa3 = getTexValue(water, -1,0);
-        vec3 wa4 = getTexValue(water, 0,-1);
-        vec2 vel = ((getTexValue(water, 0,0).yz)*0.001)/(getTexValue(water, 0,0).x*0.1+0.001);
-   //  if(length(vel) < 0.0001)
-  //      g.yz = vec2(0.0);
+
 
 
     new_moist = clamp(new_moist, 0.0, 1.0 );
  
-    color = vec3(new_moist,g.yz+vel);
+    color = vec3(new_moist,0.0,0.0);
 }
