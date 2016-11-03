@@ -13,7 +13,7 @@
 
 #include "Light.h"
 
-Light::Light(Light_Data::LightID id, glm::vec3& Color, const Light_Data::position Position) :
+Light::Light(Light_Data::LightID id, glm::vec3 Color,  Light_Data::position Position) :
 currentData({id,Color,Position})
 {
 }

@@ -27,7 +27,7 @@
 class WaterRender
 {
 public:
-    WaterRender();
+    WaterRender(const GLuint vao_plane,const float gridVertices, const glm::ivec2& gridDimensions);
 
     void init(const std::string& shaderPath,const std::string& normalTexturePath);
     
@@ -37,6 +37,8 @@ public:
     
 private:
     GLuint waterProgram,vao_plane, waterNormals;
+    glm::ivec2 gridDimensions;
+    float gridVertices;
 
 };
 

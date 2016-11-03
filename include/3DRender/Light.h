@@ -34,7 +34,7 @@ public:
      * @param Color - color of the Light
      * @param Position - Position of the Light
      */
-    Light(Light_Data::LightID id,glm::vec3& Color,const Light_Data::position Position);
+    Light(Light_Data::LightID id,glm::vec3 Color, Light_Data::position Position);
     
     
     /**

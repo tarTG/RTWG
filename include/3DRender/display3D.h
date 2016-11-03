@@ -27,19 +27,28 @@
 #include "landscapeRender.h"
 #include "WaterRender.h"
 #include "Shadows.h"
+#include "Light.h"
 class display3D 
 {
 public:
-    display3D();
+    display3D(const uint32_t windowLenght,const uint32_t windowHeight,
+                const uint32_t textureLenght,const uint32_t textureHeight);
+    
+    void init();
+    
+    void render();
 
 private:
     void generatePlane(int width, int height);
-    void initCamera(const uint32_t windowLenght,const uint32_t windowHeight);
+    void initCamera();
     std::unique_ptr<landscapeRender> landscaperender;
     std::unique_ptr<Camera> camera;
     std::unique_ptr<WaterRender> waterRender;
     std::unique_ptr<Shadows> shadows;
+    std::unique_ptr<Light> light;
     GLuint vbo_plane, vao_plane, vbo_indexbuffer;
+    glm::ivec2 windowDimension;
+    glm::ivec2 textureDimension;
     uint32_t planeVertices;
 
 };

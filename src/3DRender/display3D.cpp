@@ -15,20 +15,34 @@
 
 #include "display3D.h"
 
-display3D::display3D()
+display3D::display3D(const uint32_t windowLenght, const uint32_t windowHeight, const uint32_t textureLenght, const uint32_t textureHeight) 
+ : windowDimension(glm::ivec2(windowLenght,windowHeight)), textureDimension(glm::ivec2(textureLenght,textureHeight))
 {
+}
+
+
+void display3D::init() 
+{
+    initCamera();
+    glm::ivec2 planDimensions = glm::vec2(80,80);
+    generatePlane(planDimensions.x,planDimensions.y);
+    landscaperender = std::make_unique<landscapeRender>(vao_plane,planeVertices,planDimensions);
+    shadows = std::make_unique<Shadows>(vao_plane,planeVertices,planDimensions);
+    waterRender =  std::make_unique<WaterRender>(vao_plane,planeVertices,planDimensions);
+    light = std::make_unique<Light>( 0,glm::vec3(0),glm::vec3(40));
 }
 
 
 
 
-void display3D::initCamera(const uint32_t windowLenght,const uint32_t windowHeight)
+
+void display3D::initCamera()
 {
     camera = std::make_unique<Camera>();
    camera->setClipping(0.5f,10000.0f);
    camera->SetMove_camera(true);
    camera->SetCamera_look_at(glm::vec3(1.0,10.0,1.0));
-   camera->setViewport(0, 0, windowLenght, windowHeight);
+   camera->setViewport(0, 0, windowDimension.x, windowDimension.y);
    camera->SetField_of_view(55.0f);
    camera->SetCamera_position(glm::vec3(2.0,10.0,1.0));
 }

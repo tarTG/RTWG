@@ -14,9 +14,11 @@
 
 #include "WaterRender.h"
 
-WaterRender::WaterRender()
-{
+WaterRender::WaterRender(const GLuint vao_plane, const float gridVertices, const glm::ivec2& gridDimensions)
+:vao_plane(vao_plane),  gridVertices(gridVertices) ,gridDimensions(gridDimensions){
+
 }
+
 
 void WaterRender::init(const std::string& shaderPath, const std::string& normalTexturePath)
 {
