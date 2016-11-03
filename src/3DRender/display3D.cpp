@@ -24,7 +24,7 @@ display3D::display3D(const uint32_t windowLenght, const uint32_t windowHeight, c
 void display3D::init() 
 {
     initCamera();
-    glm::ivec2 planDimensions = glm::vec2(80,80);
+    glm::ivec2 planDimensions = glm::ivec2(80,80);
     generatePlane(planDimensions.x,planDimensions.y);
     landscaperender = std::make_unique<landscapeRender>(vao_plane,planeVertices,planDimensions);
     shadows = std::make_unique<Shadows>(vao_plane,planeVertices,planDimensions);
