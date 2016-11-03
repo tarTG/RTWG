@@ -12,10 +12,10 @@
 #include <glm/gtc/quaternion.hpp>
 
 
-class camaraHandler 
+class Camera 
 {
 public:
-    camaraHandler() = default;
+    Camera() = default;
     
     void SetCamera_look_at(glm::vec3 camera_look_at);
     

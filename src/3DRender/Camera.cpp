@@ -12,7 +12,7 @@
 #include "Camera.h"
 
 
-void camaraHandler::Update(uint64_t time)
+void Camera::Update(uint64_t time)
 {
     camera_direction = glm::normalize(camera_look_at - camera_position);
     
@@ -30,7 +30,7 @@ void camaraHandler::Update(uint64_t time)
     roll *= 0.1;
 }
 
-void camaraHandler::SetPitch(double degrees)
+void Camera::SetPitch(double degrees)
 {
     if(degrees < -max_pitch)
     {
@@ -53,7 +53,7 @@ void camaraHandler::SetPitch(double degrees)
     }    
 }
 
-void camaraHandler::SetRoll(double degrees)
+void Camera::SetRoll(double degrees)
 {
     if(degrees < -max_roll)
     {
@@ -76,7 +76,7 @@ void camaraHandler::SetRoll(double degrees)
     }        
 }
 
-void camaraHandler::SetYaw(double degrees)
+void Camera::SetYaw(double degrees)
 {
     if(degrees < -max_yaw)
     {
@@ -99,23 +99,23 @@ void camaraHandler::SetYaw(double degrees)
     }        
 }
 
-void camaraHandler::MoveX(double distance)
+void Camera::MoveX(double distance)
 {
     camera_position_delta += glm::cross(camera_direction,camera_up) * (float)distance;
 
 }
 
-void camaraHandler::MoveY(double distance)
+void Camera::MoveY(double distance)
 {
     camera_position_delta += camera_up * (float)distance;
 }
 
-void camaraHandler::MoveZ(double distance)
+void Camera::MoveZ(double distance)
 {
     camera_position_delta += camera_direction * (float)distance;
 }
 
-void camaraHandler::MoveHead(double x, double y)
+void Camera::MoveHead(double x, double y)
 {
    
     SetPitch(x);
@@ -123,7 +123,7 @@ void camaraHandler::MoveHead(double x, double y)
     
 }
 
-void camaraHandler::setViewport(int x, int y, int width,  int height)
+void Camera::setViewport(int x, int y, int width,  int height)
 {
     viewport_x = x;
     viewport_y = y;
@@ -133,57 +133,57 @@ void camaraHandler::setViewport(int x, int y, int width,  int height)
     projection = glm::perspective(field_of_view,aspect,near_clip,far_clip);
 }
 
-void camaraHandler::setClipping(double near_clip, double far_clip)
+void Camera::setClipping(double near_clip, double far_clip)
 {
     this->near_clip = near_clip;
     this->far_clip = far_clip;
     projection = glm::perspective(field_of_view,aspect,near_clip,far_clip);
 }
 
-glm::mat4 camaraHandler::getProjection()
+glm::mat4 Camera::getProjection()
 {
     return projection;
 }
 
-glm::mat4 camaraHandler::getView()
+glm::mat4 Camera::getView()
 {
     return glm::lookAt(camera_look_at,camera_position,camera_up);
 }
 
 
 
-void camaraHandler::loadViewPort() 
+void Camera::loadViewPort() 
 {
     glViewport(viewport_x,viewport_y,window_width,window_heigth);
 }
 
 
-void camaraHandler::SetCamera_look_at(glm::vec3 camera_look_at) 
+void Camera::SetCamera_look_at(glm::vec3 camera_look_at) 
 {
     this->camera_look_at = camera_look_at;
 }
 
-void camaraHandler::SetCamera_position(glm::vec3 camera_position) 
+void Camera::SetCamera_position(glm::vec3 camera_position) 
 {
     this->camera_position = camera_position;
 }
 
-void camaraHandler::SetMove_camera(bool move_camera) 
+void Camera::SetMove_camera(bool move_camera) 
 {
     this->move_camera = move_camera;
 }
 
-void camaraHandler::SetField_of_view(double field_of_view) 
+void Camera::SetField_of_view(double field_of_view) 
 {
     this->field_of_view = field_of_view;
     projection = glm::perspective(field_of_view,aspect,near_clip,far_clip);
 }
 
-void camaraHandler::SetAspect(double aspect) {
+void Camera::SetAspect(double aspect) {
     this->aspect = aspect;
 }
 
-glm::vec2 camaraHandler::getViewPort()
+glm::vec2 Camera::getViewPort()
 {
     return glm::vec2(viewport_x,viewport_y);
 }

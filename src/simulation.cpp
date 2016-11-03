@@ -260,7 +260,7 @@ simulation::DataType simulation::getCurrentDisplay() const
 void simulation::saveTextures()
 {
     int i= 0;
-    std::vector<std::string> names = {"ROCK"," SOIL "," WATER","TEMP","MOIST","WIND","ICE","Climat"};
+    std::vector<std::string> names = {"Rock","Soil"," Water","Temp","Moist","Wind","Ice","Climat"};
     for(auto& val : v_texData)
     {
         ILuint index = val.prepareExport();

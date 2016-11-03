@@ -14,12 +14,29 @@
 #ifndef WATERRENDER_H
 #define WATERRENDER_H
 
-class WaterRender {
+#include <GL3W/gl3w.h>
+#include <glm/glm.hpp>
+#include <GL/gl.h>
+#include <glm/detail/type_vec.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <IL/il.h>
+#include "TextureLoader.h"
+#include "ShaderLoader.h"
+
+class WaterRender
+{
 public:
     WaterRender();
-    WaterRender(const WaterRender& orig);
-    virtual ~WaterRender();
+
+    void init(const std::string& shaderPath,const std::string& normalTexturePath);
+    
+    void render();
+    
+    void exit();
+    
 private:
+    GLuint waterProgram,vao_plane, waterNormals;
 
 };
 

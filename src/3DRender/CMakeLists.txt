@@ -3,7 +3,8 @@ Camera.cpp
 Shadows.cpp
 WaterRender.cpp
 landscapeRender.cpp
-
+Light.cpp
+display3D.cpp
 )
 
 
