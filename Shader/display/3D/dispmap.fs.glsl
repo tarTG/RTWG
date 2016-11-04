@@ -114,9 +114,9 @@ const vec3 Color_Lake                             = vec3(0.0,0.0,0.7);
     else
         //tropicla*/
     color = getTexValue(mixtex,0.0,0.0);;
-    color = mix(color,getTexValue(texArray,texIndexSnow,0.0,0.0),getTexValue(ice,0.0,0.0).x);
+//    color = mix(color,getTexValue(texArray,texIndexSnow,0.0,0.0),getTexValue(ice,0.0,0.0).x);
     //color = mix(color,getTexValue(texArray,texIndexWater,0.0,0.0),getTexValue(water,0.0,0.0).x);
-    color = mix(color,getTexValue(texArray,texIndexDirt,0.0,0.0),getTexValue(soil,0.0,0.0).x);
+ //   color = mix(color,getTexValue(texArray,texIndexDirt,0.0,0.0),getTexValue(soil,0.0,0.0).x);
 
     return color;
 }

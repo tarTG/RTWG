@@ -23,22 +23,25 @@
 #include <IL/il.h>
 #include "TextureLoader.h"
 #include "ShaderLoader.h"
+#include "Camera.h"
+#include "Shadows.h"
+#include "Light.h"
 
 class WaterRender
 {
 public:
-    WaterRender(const GLuint vao_plane,const float gridVertices, const glm::ivec2& gridDimensions);
+    WaterRender(std::shared_ptr<plane> terrainPlain);
 
     void init(const std::string& shaderPath,const std::string& normalTexturePath);
     
-    void render();
+    void render(std::shared_ptr<Camera> camera, std::shared_ptr<Shadows> shadows, std::shared_ptr<Light> light, const float time,const float heightFactor);
     
     void exit();
     
 private:
-    GLuint waterProgram,vao_plane, waterNormals;
-    glm::ivec2 gridDimensions;
-    float gridVertices;
+    GLuint waterProgram, waterNormals;
+    std::shared_ptr<plane> terrainPlain;
+    float movementTime = 0.f;
 
 };
 

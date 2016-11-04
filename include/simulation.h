@@ -52,6 +52,10 @@ public:
      
      void newWorld();
     DataType getCurrentDisplay() const;
+    
+    void setTexturesBindings();
+    
+    void unsetTexturesBindings();
 private:
     
     void saveTextures();

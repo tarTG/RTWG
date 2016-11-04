@@ -159,7 +159,8 @@ void simulation::update()
 {
     glViewport(0,0,textureWidth,textureHeight);
     glBindVertexArray(vao);
-    
+            glActiveTexture(GL_TEXTURE8);
+    glBindTexture(GL_TEXTURE_2D, windNoiseID);
     
     v_texData.at(WIND).setParameterValue( "timeFactorWind",v_texData.at(WIND).getParameterValue("timeFactorWind")+v_texData.at(WIND).getParameterValue("windspeed"));
     v_texData.at(TEMP).setParameterValue( "timeFactorTemp",v_texData.at(TEMP).getParameterValue("timeFactorTemp")+v_texData.at(TEMP).getParameterValue("rotationSpeed"));
@@ -176,14 +177,7 @@ void simulation::update()
         v_texData.at(ROCK).setTexture(ground->getTopography());
     }
     
-        //set texture bindings
-    for(int i = 0; i < CLIMAT; ++i)
-    {
-        glActiveTexture(GL_TEXTURE0 + i);
-        glBindTexture(GL_TEXTURE_2D, v_texData.at(i).getSourceTexture());
-    }  
-        glActiveTexture(GL_TEXTURE7);
-    glBindTexture(GL_TEXTURE_2D, windNoiseID);
+
     
     std::for_each(v_texData.begin(), v_texData.end() ,[&](auto& data)
     {                data.update();
@@ -191,14 +185,8 @@ void simulation::update()
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-    glActiveTexture(GL_TEXTURE7);  
+    glActiveTexture(GL_TEXTURE8);  
     glBindTexture(GL_TEXTURE_2D, 0); 
-    
-    for(int i = ICE; i >= 0 ; --i)
-    {
-        glActiveTexture(GL_TEXTURE0 + i);
-        glBindTexture(GL_TEXTURE_2D, 0);
-    }  
     
     glClampColor(0x891A, GL_TRUE);
     glClampColor(GL_CLAMP_READ_COLOR, GL_TRUE);
@@ -255,6 +243,29 @@ simulation::DataType simulation::getCurrentDisplay() const
 {
     return currentDisplay;
 }
+
+void simulation::setTexturesBindings()
+{
+        //set texture bindings
+    for(int i = 0; i <= CLIMAT; ++i)
+    {
+        glActiveTexture(GL_TEXTURE0 + i);
+        glBindTexture(GL_TEXTURE_2D, v_texData.at(i).getSourceTexture());
+    }  
+
+}
+
+void simulation::unsetTexturesBindings()
+{
+
+    
+    for(int i = CLIMAT; i >= 0 ; --i)
+    {
+        glActiveTexture(GL_TEXTURE0 + i);
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }  
+}
+
 
 
 void simulation::saveTextures()

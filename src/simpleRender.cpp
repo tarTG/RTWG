@@ -51,8 +51,17 @@ u_int32_t simpleRender::init()
 
 void simpleRender::clearWindow() 
 {
-    glClearColor(1.f, 1.f,1.f, 1.f); //clear Window to white
+            glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+        glEnable(GL_CULL_FACE);     
+        glCullFace(GL_BACK);
+
     glClear( GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT );    //clear Color buffer and Depth Buffer
+        const GLfloat black[] = {116.f/255.0,208.f/255.0,241.f/255.0, 1.0f };
+    const GLfloat ones[] = { 1.0f };    
+    glClearBufferfv(GL_COLOR, 0,black);
+    glClearBufferfv(GL_DEPTH, 0, ones);
+
 }
 
 

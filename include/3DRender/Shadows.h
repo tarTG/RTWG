@@ -21,16 +21,19 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include "ShaderLoader.h"
+#include "plane.h"
+
+#include <memory>
 
 
 class Shadows 
 {
 public:
-    Shadows(const GLuint vao_plane,const float gridVertices, const glm::ivec2& gridDimensions );
+    Shadows(std::shared_ptr<plane> terrainPlain );
 
     void init(const std::string& shaderPath);
     void exit();
-    void render(const float heightFactor,const glm::vec3& lightPosition,const glm::mat4& planeModelMatrix,const glm::ivec2& windowDimesnions);
+    void render(const float heightFactor,const glm::vec3& lightPosition);
     
     const glm::mat4 getBiasedDepthMVP();
     
@@ -39,10 +42,9 @@ public:
     
     
 private:
-    GLuint shaderID, depthFBO, depthTexture,vao_plane;
+    GLuint shaderID, depthFBO, depthTexture;
     glm::mat4 depthMVP;
-    glm::ivec2 gridDimensions;
-    float gridVertices;
+    std::shared_ptr<plane> terrainPlain;
 
 };
 

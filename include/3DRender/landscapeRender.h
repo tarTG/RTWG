@@ -23,23 +23,27 @@
 #include <IL/il.h>
 #include "TextureLoader.h"
 #include "ShaderLoader.h"
+#include <memory>
+#include "plane.h"
+#include "Shadows.h"
+#include "Camera.h"
+#include "Light.h"
 
 class landscapeRender 
 {
 public:
-    landscapeRender(GLuint vao_plane, uint32_t drawSize, const glm::ivec2 gridDimensions);
+    landscapeRender(std::shared_ptr<plane> terrainPlain);
 
     void init(const std::string& shaderPath);
     
-    void render(const uint32_t currentDisplay,const glm::mat4 depthMVP,GLuint depthTexture, float heightFactor);
+    void render(std::shared_ptr<Camera> camera, std::shared_ptr<Shadows> shadow,std::shared_ptr<Light> light,const uint32_t currentDisplay, float heightFactor);
     
     void exit();
     
 private:
+    std::shared_ptr<plane> terrainPlain;
     GLuint displayProgram;
-    glm::ivec2 gridDimensions;
-    GLuint vao_plane;
-    uint32_t drawSize;
+
 };
 
 #endif /* LANDSCAPERENDER_H */

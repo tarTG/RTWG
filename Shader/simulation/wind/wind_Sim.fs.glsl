@@ -15,7 +15,7 @@ layout (binding = 5) uniform sampler2D wind;
 layout (binding = 6) uniform sampler2D ice;
 
 
-layout (binding = 7) uniform sampler2D noiseTex;
+layout (binding = 8) uniform sampler2D noiseTex;
 
 uniform float distorsionFaktor = 1.0;
 uniform float globelWindFaktor = 1.0;

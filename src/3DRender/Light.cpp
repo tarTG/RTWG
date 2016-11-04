@@ -28,3 +28,8 @@ void Light::changePosition(const Light_Data::position& Position)
     currentData.Position = Position;
 }
 
+Light_Data& Light::getCurrentData() 
+{
+    return currentData;
+}
+

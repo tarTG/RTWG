@@ -50,6 +50,12 @@ public:
      * @param Position - new Position
      */
     void changePosition(const Light_Data::position& Position);
+    
+    /**
+     * Get current Data of the light
+     * @return 
+     */
+    Light_Data& getCurrentData() ;
 
 private:
 

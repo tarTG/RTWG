@@ -28,6 +28,8 @@
 #include "WaterRender.h"
 #include "Shadows.h"
 #include "Light.h"
+#include "plane.h"
+#include "inputHandler.h"
 class display3D 
 {
 public:
@@ -36,20 +38,27 @@ public:
     
     void init();
     
-    void render();
+    void render(float frameTime);
+    
+        void handleCameraInput(GLFWwindow* window);
 
 private:
-    void generatePlane(int width, int height);
+
     void initCamera();
-    std::unique_ptr<landscapeRender> landscaperender;
-    std::unique_ptr<Camera> camera;
-    std::unique_ptr<WaterRender> waterRender;
-    std::unique_ptr<Shadows> shadows;
-    std::unique_ptr<Light> light;
-    GLuint vbo_plane, vao_plane, vbo_indexbuffer;
+
+    std::shared_ptr<landscapeRender> landscaperender;
+    std::shared_ptr<Camera> camera;
+    std::shared_ptr<WaterRender> waterRender;
+    std::shared_ptr<Shadows> shadows;
+    std::shared_ptr<Light> light;
+    std::shared_ptr<plane> terrainPlain;
+ 
+    glm::dvec2 prevMousePosition = glm::dvec2(0.0);
     glm::ivec2 windowDimension;
     glm::ivec2 textureDimension;
-    uint32_t planeVertices;
+    GLuint  vao;
+    TwBar* Bar3D;
+    float heightFactor = 1.0;
 
 };
 

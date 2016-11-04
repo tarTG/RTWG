@@ -17,6 +17,7 @@
 #include "simulation.h"
 #include "display2D.h"
 #include "simpleRender.h"
+#include "display3D.h"
 
 using namespace std;
 
@@ -27,7 +28,7 @@ int main(int argc, char** argv)
 {
     float frameTime; //current frame time
     bool enable_tectonic = true; //bool for enabling/disabling tectonic
-    int windowWidth = 800, windowHeight= 600; //start values for window dimensions
+    int windowWidth = 1800, windowHeight= 1000; //start values for window dimensions
     int textureWidth = 800, textureHeight= 600; 
     srand(time(NULL)); //initialize random number generator
 
@@ -49,8 +50,9 @@ int main(int argc, char** argv)
     sim->initLithosphere(0.56,0.01,8000000, 3.00,10,0.7);
 
     std::unique_ptr<display2D> disp = std::make_unique<display2D>("display/2D/2d_display");
-    
+    std::unique_ptr<display3D> disp3D = std::make_unique<display3D>(windowWidth,windowHeight,textureWidth,textureHeight);
 
+    disp3D->init();
     //initialize time counter
     auto timeBeforeLoop =  std::chrono::high_resolution_clock::now();        
     
@@ -64,10 +66,13 @@ int main(int argc, char** argv)
         glfwGetWindowSize(render->getWindow(),&windowWidth, &windowHeight);
         
         render->clearWindow(); //clear window
-
+        disp3D->handleCameraInput(render->getWindow());
+        sim->setTexturesBindings();
          sim->update();
          disp->render({windowWidth,windowHeight},sim->getCurrentDisplay(),sim->getTextureID(sim->getCurrentDisplay()));
+        // disp3D->render(frameTime);
           input->update(); //handle input
+          sim->unsetTexturesBindings();
 
          
          

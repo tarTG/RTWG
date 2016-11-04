@@ -15,16 +15,16 @@
 #include "Shadows.h"
 
 
-Shadows::Shadows(const GLuint vao_plane, const float gridVertices,const glm::ivec2& gridDimensions )
-    :vao_plane(vao_plane),  gridVertices(gridVertices) ,gridDimensions(gridDimensions)
+Shadows::Shadows(std::shared_ptr<plane> terrainPlain )
+    :terrainPlain(terrainPlain)
 {
 }
 
 void Shadows::init(const std::string& shaderPath)
 {
-    glBindVertexArray(vao_plane);
+    glBindVertexArray(terrainPlain->getVao_plane());
 
-    shaderID = ShaderLoader::generateProgram(std::string(SHADER_PATH) +"display/3D/Shadow");
+    shaderID = ShaderLoader::generateProgram(shaderPath);
     glGenFramebuffers(1, &depthFBO);
     glBindFramebuffer(GL_FRAMEBUFFER,depthFBO);
     
@@ -49,7 +49,7 @@ void Shadows::init(const std::string& shaderPath)
     glBindVertexArray(0);
 }
 
-void Shadows::render(const float heightFactor,const glm::vec3& lightPosition,const glm::mat4& planeModelMatrix,const glm::ivec2& windowDimesnions)
+void Shadows::render(const float heightFactor,const glm::vec3& lightPosition)
 {
     glBindFramebuffer(GL_FRAMEBUFFER,depthFBO);
      glCullFace(GL_FRONT);
@@ -59,26 +59,24 @@ void Shadows::render(const float heightFactor,const glm::vec3& lightPosition,con
     glClear(GL_DEPTH_BUFFER_BIT);
     glUseProgram(shaderID);
 
-    glBindVertexArray(vao_plane);
 
 
-    glUniform2iv(glGetUniformLocation(shaderID, "dimensions"),1,glm::value_ptr(gridDimensions));
+    glUniform2iv(glGetUniformLocation(shaderID, "dimensions"),1,glm::value_ptr(terrainPlain->getPlaneDimension()));
     glUniform1f(glGetUniformLocation(shaderID, "heightFactor"),heightFactor);
     
     
      depthMVP = glm::ortho(-30.0f, 30.0f, -30.0f, 30.0f, -100.0f, 20000.0f)
-                        * glm::lookAt( lightPosition*glm::vec3(10),glm::vec3(gridDimensions.x/2.0,5.0,gridDimensions.y/2.0), glm::vec3(0,1,0))
+                        * glm::lookAt( lightPosition*glm::vec3(10),glm::vec3(terrainPlain->getPlaneDimension().x/2.0,5.0,terrainPlain->getPlaneDimension().y/2.0), glm::vec3(0,1,0))
                       * glm::mat4(1.0) ;
     glUniformMatrix4fv(glGetUniformLocation(shaderID,"depthMVP"), 1, GL_FALSE,
                        glm::value_ptr(depthMVP));
-    glUniformMatrix4fv(glGetUniformLocation(shaderID, "model_matrix"),1,GL_FALSE,glm::value_ptr( planeModelMatrix));
+    glUniformMatrix4fv(glGetUniformLocation(shaderID, "model_matrix"),1,GL_FALSE,glm::value_ptr( terrainPlain->getModel_matrix()));
 
-    glDrawElements(GL_PATCHES,gridVertices, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_PATCHES,terrainPlain->getPlaneVertices(), GL_UNSIGNED_INT, 0);
     glUseProgram(0);
-    glBindVertexArray(0);    
     glBindFramebuffer(GL_FRAMEBUFFER,0);
     glClear( GL_DEPTH_BUFFER_BIT);
-     glViewport(0,0,windowDimesnions.x, windowDimesnions.y);
+
 
     glCullFace(GL_BACK);
 }
