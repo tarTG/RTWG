@@ -22,11 +22,12 @@ layout (binding = 6) uniform sampler2D ice;
 layout (binding = 7) uniform sampler2D mixtex;
 layout (binding = 8) uniform sampler2DShadow shadow_tex;
 
-layout (binding = 10) uniform sampler2D waterNormals;
+layout (binding = 9) uniform sampler2D waterNormals;
+layout (binding = 11) uniform sampler2D waterFlow;
 
 uniform ivec2 dimensions;
 uniform float waterSpeed;
-uniform float timeFactor;
+
 in vec4 position;
 
 vec3 getTexValue(sampler2D tex, float x, float y)
@@ -40,18 +41,18 @@ vec3 getnormal()
 {
 
 
-    vec2 mid= getTexValue(moist, 0,0).yz*-waterSpeed;
-   vec2 down = (getTexValue(moist, -1,1).yz*-waterSpeed+mid)*0.5;
-    vec2 top = (getTexValue(moist, 1, 1).yz*-waterSpeed+mid)*0.5;
-    vec2 right = (getTexValue(moist, -1, -1).yz*-waterSpeed+mid)*0.5;
-    vec2 left = (getTexValue(moist,1,-1 ).yz*-waterSpeed+mid)*0.5;
+    vec2 mid= getTexValue(waterFlow, 0,0).xy*-waterSpeed;
+   vec2 down = (getTexValue(waterFlow, -1,1).xy*-waterSpeed+mid)*0.5;
+    vec2 top = (getTexValue(waterFlow, 1, 1).xy*-waterSpeed+mid)*0.5;
+    vec2 right = (getTexValue(waterFlow, -1, -1).xy*-waterSpeed+mid)*0.5;
+    vec2 left = (getTexValue(waterFlow,1,-1 ).xy*-waterSpeed+mid)*0.5;
             
  
     
- vec3 downt = normalize(texture2D(waterNormals,(texcoordF+(vec2(-1,1)/textureSize(moist,0)))*400+down).xyz*2-1);
-    vec3 topt = normalize(texture2D(waterNormals,(texcoordF+(vec2(1,1)/textureSize(moist,0)))*400+top).xyz*2-1);
-    vec3 rightt = normalize(texture2D(waterNormals,(texcoordF+(vec2(-1,-1)/textureSize(moist,0)))*400+right).xyz*2-1);
-    vec3 leftt = normalize(texture2D(waterNormals,(texcoordF+(vec2(1,-1)/textureSize(moist,0)))*400+left).xyz*2-1);
+ vec3 downt = normalize(texture2D(waterNormals,(texcoordF+(vec2(-1,1)/textureSize(waterFlow,0)))*400+down).xyz*2-1);
+    vec3 topt = normalize(texture2D(waterNormals,(texcoordF+(vec2(1,1)/textureSize(waterFlow,0)))*400+top).xyz*2-1);
+    vec3 rightt = normalize(texture2D(waterNormals,(texcoordF+(vec2(-1,-1)/textureSize(waterFlow,0)))*400+right).xyz*2-1);
+    vec3 leftt = normalize(texture2D(waterNormals,(texcoordF+(vec2(1,-1)/textureSize(waterFlow,0)))*400+left).xyz*2-1);
 
  vec3 normal1 = mix(downt, topt,tessCoord.x);
     vec3 normal2 = mix(rightt, leftt, tessCoord.x);
@@ -86,7 +87,7 @@ void main()
     vec3 normal = normalize(mix(base_normal*0.5+detail_normal*0.5, detail_normal, speed_factor));
     normal = normalize(mix(normal, base_normal, sqrt(clamp(w.x/0.0075, 0.0, 1.0))*0.75));
 
-    vec3 N = normal;
+    vec3 N =normal;
     vec3  L = normalize(vs_out.L);
     vec3 V = normalize(vs_out.V);
 
@@ -115,7 +116,7 @@ void main()
                   visibility /= 4.0;
     }
 
-        color = vec4((v_diffuse.xyz + tcolor +v_specular) *visibility,depth_factor) ;
+        color =vec4((v_diffuse.xyz + tcolor +v_specular) *visibility,depth_factor) ;
 
 
     if(w.x <0.04 && length(w.yz) < 0.02)

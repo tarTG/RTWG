@@ -23,45 +23,40 @@ GLuint TextureLoader::load2DTexture(const std::string& fileName, const GLuint OU
 {
    ILuint imgID =0;                                  //id of the image
    ilInit(); //init DevIL
-   ilGenImages(1,&imgID);       //generate image ID
-   ilBindImage(imgID);         //bind Image
+
    GLuint textureID;
    
-   if(ilLoadImage(fileName.c_str())) //try to load image
-   {
-        ilEnable(IL_ORIGIN_SET);    
-        ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
-
-        ilGenImages(1,&imgID);       //generate image ID
-        glGenTextures(1,&textureID);  //generate Texture ID
-        ilBindImage(imgID);         //bind Image
+    ilGenImages(1,&imgID);       //generate image ID
+    glGenTextures(1,&textureID);  //generate Texture ID
+    ilBindImage(imgID);         //bind Image
 
 
-            if(!ilConvertImage(INcolorFormat,INvalueFormat))
-            {
-                 std::stringstream s;        
-                 s <<"Could not convert texture " << fileName.c_str();
-                 std::cout  << s.str()<< std::endl;
-                 return 0;
-            }     
+    //some devIL options
+    ilEnable(IL_ORIGIN_SET);    
+    ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
+    if(ilLoadImage(fileName.c_str())) //try to load image
+    {
+        if(!ilConvertImage(INcolorFormat,INvalueFormat))
+            return 0;  //convert image
 
-           glBindTexture(GL_TEXTURE_2D, textureID);
+       glBindTexture(GL_TEXTURE_2D, textureID);
 
-            glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR); //setup Opengl Texture
-            glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR); 
-         
-            //load texture                    
+        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR); //setup Opengl Texture
+        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR); 
 
-          glTexImage2D(GL_TEXTURE_2D,0,OUTcolorFormat, ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), 0, OUTcolorFormat, OUTvalueFormat,ilGetData()); 
-             glBindTexture(GL_TEXTURE_2D, 0);
+        //load texture                    
 
-   }
+      glTexImage2D(GL_TEXTURE_2D,0,OUTcolorFormat, ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), 0, OUTcolorFormat, OUTvalueFormat,ilGetData()); 
+         glBindTexture(GL_TEXTURE_2D, 0);
+    }
     else //if image loading didn't work. print error
     {
-         std::stringstream s;        
-         s <<"Could not load texture " << fileName.c_str();
-         std::cout  << s.str()<< std::endl;
-    }       
+     std::stringstream s;        
+     s <<"Could not load texture " << fileName.c_str();
+     std::cout  << s.str()<< std::endl;
+    }                    
+        
+   
     ilDeleteImage(imgID); //delete image
     return textureID;
 }

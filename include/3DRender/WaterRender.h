@@ -21,6 +21,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <IL/il.h>
+#include <AntTweakBar.h>
+#include "RendToTex.h"
 #include "TextureLoader.h"
 #include "ShaderLoader.h"
 #include "Camera.h"
@@ -30,9 +32,9 @@
 class WaterRender
 {
 public:
-    WaterRender(std::shared_ptr<plane> terrainPlain);
+    WaterRender(std::shared_ptr<plane> terrainPlain,const glm::ivec2& textureDimension);
 
-    void init(const std::string& shaderPath,const std::string& normalTexturePath);
+    void init(const std::string& shaderPath,const std::string& normalTexturePath, TwBar* Bar3d);
     
     void render(std::shared_ptr<Camera> camera, std::shared_ptr<Shadows> shadows, std::shared_ptr<Light> light, const float time,const float heightFactor);
     
@@ -41,6 +43,8 @@ public:
 private:
     GLuint waterProgram, waterNormals;
     std::shared_ptr<plane> terrainPlain;
+    std::unique_ptr<RendToTex> waterFlows;
+    glm::ivec2 textureDimension;
     float movementTime = 0.f;
 
 };

@@ -32,18 +32,22 @@ void display3D::init()
 
     landscaperender = std::make_shared<landscapeRender>(terrainPlain);
     shadows = std::make_shared<Shadows>(terrainPlain);
-    waterRender =  std::make_shared<WaterRender>(terrainPlain);
+    waterRender =  std::make_shared<WaterRender>(terrainPlain,textureDimension);
     light = std::make_shared<Light>( 0,glm::vec3(0),glm::vec3(40));
+    
+    Bar3D = inputHandler::createNewBar("3DConrtols","position='608 8' size='200 400'");
+    TwAddVarRW(Bar3D,"Light Position",TW_TYPE_DIR3F,&(light->getCurrentData().Position),"");
+    TwAddVarRW(Bar3D,"Light Color",TW_TYPE_COLOR3F,&(light->getCurrentData().Color),"");    
+    TwAddVarRW(Bar3D,"Height Factor",TW_TYPE_FLOAT,&(heightFactor)," min=0.1 max = 6.0 step = 0.1" ); 
+    
+     glBindVertexArray(terrainPlain->getVao_plane());
 
     landscaperender->init(std::string(SHADER_PATH) + "display/3D/dispmap");
     shadows->init(std::string(SHADER_PATH) +  "display/3D/Shadow");
-    waterRender->init(std::string(SHADER_PATH) +  "display/3D/waterDispmap",std::string(RESOURCES_PATH) + "grass_normals.png");
+    waterRender->init(std::string(SHADER_PATH) +  "display/3D/waterDispmap",std::string(RESOURCES_PATH) + "grass_normals.png",Bar3D);
      glBindVertexArray(0);
      
-     Bar3D = inputHandler::createNewBar("3DConrtols","position='608 8' size='200 400'");
-     TwAddVarRW(Bar3D,"Light Position",TW_TYPE_DIR3F,&(light->getCurrentData().Position),"");
-    TwAddVarRW(Bar3D,"Light Color",TW_TYPE_COLOR3F,&(light->getCurrentData().Color),"");    
-    TwAddVarRW(Bar3D,"Height Factor",TW_TYPE_FLOAT,&(heightFactor)," min=0.1 max = 6.0 step = 0.1" ); 
+
 }
 
 void display3D::render(float frameTime)
@@ -58,7 +62,7 @@ void display3D::render(float frameTime)
      glBindVertexArray(terrainPlain->getVao_plane());
     
     
-    shadows->render(heightFactor,light->getCurrentData().Position);
+ //   shadows->render(heightFactor,light->getCurrentData().Position);
     camera->setViewport(0.0,0.0,windowDimension.x,windowDimension.y);
     camera->loadViewPort();
     landscaperender->render(camera,shadows,light,8,heightFactor);
