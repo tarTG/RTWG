@@ -18,8 +18,8 @@
 #include "RendToTex.h"
 
 
-RendToTex::RendToTex(unsigned int _sourceBuffer, unsigned int _destinationBuffer, const std::string& shaderPath, unsigned int textureWidth, unsigned int textureHeight, const GLuint colorFormat, const GLuint interpolation)
-            : sourceBuffer(_sourceBuffer), destinationBuffer(_destinationBuffer), textureWidth(textureWidth), textureHeight(textureHeight), colorFormat(colorFormat), enable(true)
+RendToTex::RendToTex(const std::string& shaderPath, unsigned int textureWidth, unsigned int textureHeight, const GLuint colorFormat, const GLuint interpolation)
+            : textureWidth(textureWidth), textureHeight(textureHeight), colorFormat(colorFormat), enable(true)
 {
     shaderID = ShaderLoader::generateProgram(shaderPath);
     glGenFramebuffers(2,fboBuffer.data());

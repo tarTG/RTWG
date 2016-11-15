@@ -62,7 +62,7 @@ void display3D::render(float frameTime)
      glBindVertexArray(terrainPlain->getVao_plane());
     
     
- //   shadows->render(heightFactor,light->getCurrentData().Position);
+    shadows->render(heightFactor,light->getCurrentData().Position);
     camera->setViewport(0.0,0.0,windowDimension.x,windowDimension.y);
     camera->loadViewPort();
     landscaperender->render(camera,shadows,light,8,heightFactor);

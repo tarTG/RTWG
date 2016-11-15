@@ -9,22 +9,6 @@ add-apt-repository -y ppa:pyglfw/pyglfw && sudo apt-get update -qq && sudo apt-g
 #install glm
 apt-get install -y libglm-dev
 
-#install gl3w
-mkdir gl3w
-cd gl3w
-wget https://github.com/skaslev/gl3w/archive/master.zip 
-unzip master.zip
-cd gl3w-master
-python3 gl3w_gen.py
-mkdir build
-cd build
-cmake ..
-make
-sudo make install
-cd ..
-cd ..
-cd ..
-
 #install anttweak bar
 mkdir anttweakbar
 cd anttweakbar

@@ -33,7 +33,7 @@ void WaterRender::init(const std::string& shaderPath, const std::string& normalT
 
     waterProgram = ShaderLoader::generateProgram(shaderPath);
     
-    waterFlows = std::make_unique<RendToTex>(0,1,std::string(SHADER_PATH ) + std::string("display/3D/waterFlow"),textureDimension.x,textureDimension.y,GL_RGB,GL_NEAREST);
+    waterFlows = std::make_unique<RendToTex>(std::string(SHADER_PATH ) + "display/3D/waterFlow",textureDimension.x,textureDimension.y,GL_RGB,GL_NEAREST);
     waterFlows->setUniforms({{3.0,"WaterSpeed"}});
     waterFlows->generateParameterBar(Bar3d ,"",{"min=0.0 max = 10.0 step = 0.1"});
 

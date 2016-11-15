@@ -28,36 +28,36 @@ void simulation::init()
     glBindVertexArray(vao);
     initGUIElements();
     //init Rock
-    v_texData.at(ROCK) = RendToTex(sourceBuffer,destinationBuffer,std::string(SHADER_PATH ) + std::string("simulation/rock/rock_Sim"),textureWidth,textureHeight,GL_RED);
+    v_texData.at(ROCK) = RendToTex(std::string(SHADER_PATH ) + std::string("simulation/rock/rock_Sim"),textureWidth,textureHeight,GL_RED);
     v_texData.at(ROCK).setUniforms({{0.3,"min_therm_limit"},{3.0,"max_therm_limit"},{0.0,"threm_factor"}});
     v_texData.at(ROCK).generateParameterBar(parameterBar,"Rock",{"min=0.0 max = 10.0 step = 0.1","min=0.0 max = 10.0 step = 0.1","min=0.0 max = 5.0 step = 0.1"});
     v_texData.at(ROCK).generateActivationBar(activationBar,"Rock");
 
     //init Soil
-    v_texData.at(SOIL) = RendToTex(sourceBuffer,destinationBuffer,std::string(SHADER_PATH )  + "simulation/soil/soil_Sim",textureWidth,textureHeight,GL_RGB);
+    v_texData.at(SOIL) = RendToTex(std::string(SHADER_PATH )  + "simulation/soil/soil_Sim",textureWidth,textureHeight,GL_RGB);
     v_texData.at(SOIL).setUniforms({{1.0,"errodeFactor"},{1.0,"soilDiffuseFactor"}});
     v_texData.at(SOIL).generateParameterBar(parameterBar,"Soil",{"min=0.0 max = 2.0 step = 0.1","min=0.0 max = 2.0 step = 0.1"});
     v_texData.at(SOIL).generateActivationBar(activationBar,"Soil");
     //init Water
-    v_texData.at(WATER) = RendToTex(sourceBuffer,destinationBuffer,std::string(SHADER_PATH )  + "simulation/water/water_Sim",textureWidth,textureHeight,GL_RGB);
+    v_texData.at(WATER) = RendToTex(std::string(SHADER_PATH )  + "simulation/water/water_Sim",textureWidth,textureHeight,GL_RGB);
     v_texData.at(WATER).setUniforms({{1.0,"rain"},{1.0,"evaporate"},{0.95,"sea_level"}});
     v_texData.at(WATER).generateParameterBar(parameterBar,"Water",{"min=0.0 max = 2.0 step = 0.01","min=0.0 max = 2.0 step = 0.01","min=0.0 max = 10.0 step = 0.01"});
     v_texData.at(WATER).generateActivationBar(activationBar,"Water");
         
     //init temperature 
-    v_texData.at(TEMP) = RendToTex(sourceBuffer,destinationBuffer,std::string(SHADER_PATH )  + "simulation/temp/temp_Sim",textureWidth,textureHeight,GL_RGB);
+    v_texData.at(TEMP) = RendToTex(std::string(SHADER_PATH )  + "simulation/temp/temp_Sim",textureWidth,textureHeight,GL_RGB);
     v_texData.at(TEMP).setUniforms({{0.0,"latFactor"},{0.0,"sunAngle"},{2.5,"heightCooldown"},{0.0,"timeFactorTemp"},{-0.02,"rotationSpeed"},{-0.2,"DayNightFactor"}});
     v_texData.at(TEMP).generateParameterBar(parameterBar,"Temperature",{"min=-5.0 max=5.0 step= 0.1","min=-40 max=40 step = 1.0","min=1.0 max = 7.0 step = 0.1","visible=false","min=-1.0 max = 1.0 step = 0.001","min=-2.0 max = 2.0 step = 0.1"});
      v_texData.at(TEMP).generateActivationBar(activationBar,"Temperature");
      
     //init  moist
-    v_texData.at(MOIST) = RendToTex(sourceBuffer,destinationBuffer,std::string(SHADER_PATH )  + "simulation/moist/moist_Sim",textureWidth,textureHeight,GL_RGB);
+    v_texData.at(MOIST) = RendToTex(std::string(SHADER_PATH )  + "simulation/moist/moist_Sim",textureWidth,textureHeight,GL_RGB);
     v_texData.at(MOIST).setUniforms({{1.0,"waterAddFactor"},{0.0,"landRemoveFactor"}});
     v_texData.at(MOIST).generateParameterBar(parameterBar,"Moist",{"min=0.0 max=5.0 step= 0.1","min=0.0 max=5.0 step = 0.1"});   
     v_texData.at(MOIST).generateActivationBar(activationBar,"Moist");    
     
     //init wind 
-    v_texData.at(WIND) = RendToTex(sourceBuffer,destinationBuffer,std::string(SHADER_PATH )  + "simulation/wind/wind_Sim",textureWidth,textureHeight,GL_RGB);
+    v_texData.at(WIND) = RendToTex(std::string(SHADER_PATH )  + "simulation/wind/wind_Sim",textureWidth,textureHeight,GL_RGB);
     v_texData.at(WIND).setUniforms({{1.0,"distorsionFaktor"},{1.0,"globelWindFaktor"},{1.0,"localPressureFaktor"},{0.0,"timeFactorWind"},{0.001,"windspeed"},{0.6,"windNoiseRoughness"},{2,"windNoiseTurbulence"}});
     v_texData.at(WIND).generateParameterBar(parameterBar,"Wind",{"min=-2.0 max=2.0 step=0.1","min=-2.0 max = 2.0 step = 0.1","min=-2.0 max = 2.0 step = 0.1","visible=false","min=-1.0 max = 1.0 step = 0.001","min=0.0 max = 8.0 step = 0.1","min=1 max = 20 step = 1"});
     v_texData.at(WIND).generateActivationBar(activationBar,"Wind");   
@@ -72,13 +72,13 @@ void simulation::init()
     
     
         //init ice
-    v_texData.at(ICE) = RendToTex(sourceBuffer,destinationBuffer,std::string(SHADER_PATH )  + "simulation/ice/ice_Sim",textureWidth,textureHeight,GL_RGB);
+    v_texData.at(ICE) = RendToTex(std::string(SHADER_PATH )  + "simulation/ice/ice_Sim",textureWidth,textureHeight,GL_RGB);
     v_texData.at(ICE).setUniforms({{-0.7,"iceTemperature"}});
     v_texData.at(ICE).generateParameterBar(parameterBar,"Ice",{"min=-1.0 max=1.0 step=0.1"});
     v_texData.at(ICE).generateActivationBar(activationBar,"Ice");    
     
      //init climat 
-    v_texData.at(CLIMAT) = RendToTex(sourceBuffer,destinationBuffer,std::string(SHADER_PATH )  + "simulation/climat/climat",textureWidth,textureHeight,GL_RGB);
+    v_texData.at(CLIMAT) = RendToTex(std::string(SHADER_PATH )  + "simulation/climat/climat",textureWidth,textureHeight,GL_RGB);
     
 
     glBindVertexArray(0);

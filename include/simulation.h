@@ -67,8 +67,6 @@ private:
 
     TwBar* parameterBar, *activationBar, *general ;
     std::vector<RendToTex> v_texData;
-    unsigned int sourceBuffer = 0;
-    unsigned int destinationBuffer = 1;
     unsigned int textureWidth, textureHeight;
     GLuint vao, windNoiseID;
     std::unique_ptr<lithosphere> ground;
