@@ -2,6 +2,8 @@
 set -ex
 
 apt-get -qq update
+apt-get install libxcursor-dev
+apt-get install libxinerama-dev
 #install lib noise
 apt-get install -y libnoise-dev
 #install glfw3
