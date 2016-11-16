@@ -16,7 +16,7 @@ layout (binding = 7) uniform sampler2D mixtex;
 layout (binding = 8) uniform sampler2D shadow;*/
 
 
-uniform uint currentSelection = 7;
+uniform uint currentSelection;
 uniform ivec2 WindowDimension = ivec2(800,600);
 
 vec3 getTexValue(sampler2D tex, float x, float y)
@@ -100,6 +100,7 @@ void main()
                 color = getTexValue(tex,0.0,0.0).xyz;
                 break;
             case 7:
+            case 8:
                 color = getTexValue(tex,0.0,0.0).xyz;
                 break;
         }

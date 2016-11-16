@@ -33,7 +33,8 @@ public:
         MOIST = 4,
         WIND = 5,
         ICE = 6,
-        CLIMAT = 7
+        CLIMAT = 7,
+        render3D = 8
     };
     simulation(unsigned int texureWidth, unsigned int textureHeight);
 

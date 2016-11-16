@@ -87,10 +87,10 @@ void simulation::init()
 void simulation::initGUIElements()
 {
     TwEnumVal twdisplayEnum[] = { {DataType::ROCK, "Rock"}, {DataType::SOIL, "Soil"}, {DataType::WATER, "Water"}, {DataType::TEMP, "Temp"}, 
-                                  {DataType::MOIST, "Moist"}, {DataType::WIND, "Wind"}, {DataType::ICE, "Ice"}, {DataType::CLIMAT, "Climat"}};
+                                  {DataType::MOIST, "Moist"}, {DataType::WIND, "Wind"}, {DataType::ICE, "Ice"}, {DataType::CLIMAT, "Climat"}, {DataType::render3D, "3D"}};
     TwType twDisplay;
     // Defining season enum type
-    twDisplay = TwDefineEnum("SeasonType", twdisplayEnum, 8);
+    twDisplay = TwDefineEnum("SeasonType", twdisplayEnum, 9);
     parameterBar = inputHandler::createNewBar("Parameters","position='8 8' size='200 500'"); 
     activationBar = inputHandler::createNewBar("Activation","position='208 8' size='200 400'"); 
     general = inputHandler::createNewBar("General","position='408 8' size='200 400'"); 
@@ -177,7 +177,7 @@ void simulation::update()
         v_texData.at(ROCK).setTexture(ground->getTopography());
     }
     
-
+    setTexturesBindings();
     
     std::for_each(v_texData.begin(), v_texData.end() ,[&](auto& data)
     {                data.update();
@@ -196,7 +196,7 @@ void simulation::update()
     std::for_each(v_texData.begin(), v_texData.end(),[&](auto& data)
         {                data.swapTexture();
         });   
-    
+        unsetTexturesBindings();
 }
 
 void simulation::restart()

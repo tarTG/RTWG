@@ -67,12 +67,12 @@ int main(int argc, char** argv)
         
         render->clearWindow(); //clear window
         disp3D->handleCameraInput(render->getWindow());
-        sim->setTexturesBindings();
+
          sim->update();
-//         disp->render({windowWidth,windowHeight},sim->getCurrentDisplay(),sim->getTextureID(sim->getCurrentDisplay()));
-         disp3D->render(frameTime);
+   //      disp->render({windowWidth,windowHeight},sim->getCurrentDisplay(),sim->getTextureID(sim->getCurrentDisplay()));
+       disp3D->render(frameTime,sim.get());
           input->update(); //handle input
-          sim->unsetTexturesBindings();
+
 
          
          

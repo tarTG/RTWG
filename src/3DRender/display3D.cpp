@@ -16,6 +16,8 @@
 #include <AntTweakBar.h>
 
 #include "display3D.h"
+#include "simpleRender.h"
+#include "simulation.h"
 
 display3D::display3D(const uint32_t windowLenght, const uint32_t windowHeight, const uint32_t textureLenght, const uint32_t textureHeight) 
  : windowDimension(glm::ivec2(windowLenght,windowHeight)), textureDimension(glm::ivec2(textureLenght,textureHeight))
@@ -50,10 +52,11 @@ void display3D::init()
 
 }
 
-void display3D::render(float frameTime)
+void display3D::render(float frameTime,simulation* sim)
 {
     
-
+    sim->setTexturesBindings();
+    
     camera->Update(frameTime);
         //0891A = GL_CLAMP_VERTEX_COLOR, 0x891B = GL_CLAMP_FRAGMENT_COLOR
     glClampColor(0x891A, GL_FALSE);
@@ -65,13 +68,14 @@ void display3D::render(float frameTime)
     shadows->render(heightFactor,light->getCurrentData().Position);
     camera->setViewport(0.0,0.0,windowDimension.x,windowDimension.y);
     camera->loadViewPort();
-    landscaperender->render(camera,shadows,light,8,heightFactor);
+    landscaperender->render(camera,shadows,light,sim->getCurrentDisplay(),heightFactor);
     waterRender->render(camera,shadows,light,frameTime,heightFactor);
     
         glBindVertexArray(0);
         glClampColor(0x891A, GL_TRUE);
     glClampColor(GL_CLAMP_READ_COLOR, GL_TRUE);
     glClampColor(0x891B, GL_TRUE);
+    sim->unsetTexturesBindings();
     
 }
 

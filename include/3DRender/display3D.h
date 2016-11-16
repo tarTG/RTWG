@@ -30,6 +30,7 @@
 #include "Light.h"
 #include "plane.h"
 #include "inputHandler.h"
+#include "simulation.h"
 class display3D 
 {
 public:
@@ -38,7 +39,7 @@ public:
     
     void init();
     
-    void render(float frameTime);
+    void render(float frameTime,simulation* sim);
     
         void handleCameraInput(GLFWwindow* window);
 
