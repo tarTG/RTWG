@@ -69,8 +69,14 @@ int main(int argc, char** argv)
         disp3D->handleCameraInput(render->getWindow());
 
          sim->update();
-   //      disp->render({windowWidth,windowHeight},sim->getCurrentDisplay(),sim->getTextureID(sim->getCurrentDisplay()));
-       disp3D->render(frameTime,sim.get());
+         if(disp3D->isRender3D())
+         {
+            disp->render({windowWidth,windowHeight},sim->getCurrentDisplay(),sim->getTextureID(sim->getCurrentDisplay()));
+         }
+         else
+         {
+            disp3D->render(frameTime,sim.get());
+         }
           input->update(); //handle input
 
 

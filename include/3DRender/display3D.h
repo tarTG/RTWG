@@ -42,6 +42,7 @@ public:
     void render(float frameTime,simulation* sim);
     
         void handleCameraInput(GLFWwindow* window);
+    bool isRender3D() const;
 
 private:
 
@@ -54,6 +55,7 @@ private:
     std::shared_ptr<Light> light;
     std::shared_ptr<plane> terrainPlain;
  
+    bool render3D = true;
     glm::dvec2 prevMousePosition = glm::dvec2(0.0);
     glm::ivec2 windowDimension;
     glm::ivec2 textureDimension;

@@ -115,6 +115,15 @@ void display3D::handleCameraInput(GLFWwindow* window)
         {
             camera->MoveZ(0.7);
         }          
+        if(glfwGetKey(window,GLFW_KEY_TAB) == GLFW_PRESS)
+         {
+            render3D = !render3D;
+        }
+}
+
+bool display3D::isRender3D() const
+{
+    return render3D;
 }
 
 
