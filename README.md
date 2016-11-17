@@ -34,6 +34,8 @@ This is the result of my Masterthesis on the University of Applied Sciences in R
 -----|------
 Tab | toogle between 3D / 2D
 w/s/a/d | camera movement in 3D
+Shift + Mouse | camera movement in 3D
+
 
 Different simulation parts can be changed on top "General" Bar (Current Display)
 
