@@ -1,4 +1,56 @@
 # RTWG
-The Real-Time World Generation project aims to provide a tool for world/terrain generation based on procedural algorithms and cellular automata simulation.
-
 [![Build Status](https://travis-ci.org/tarTG/RTWG.svg?branch=master)](https://travis-ci.org/tarTG/RTWG)
+
+The Real-Time World Generation project aims to provide a tool for world/terrain generation based on procedural algorithms and cellular automata simulation.
+This is the result of my Masterthesis on the University of Applied Sciences in Rosenheim. The Thesis will be added, when its done.
+
+## Features
+
+- Start world is generated thought prozedural algorithmen or imported heightmap
+- Realtime simulation and manipulation of water, wind, soil, moist, ice, plate-tectonic, temperature and their resulting climat zones
+- 2D and 3D representation
+- PNG Export of all data
+
+## Reqirements
+
+- OpenGL 4.+
+- a C++14 compiler
+- currently only tested under Debian/Ubuntu-based Linux
+
+## Installation
+
+- go to the RTWG folder
+- submodule update --init --recursive
+- sudo scipts/installDependencies.sh
+- mkdir build
+- cd build
+- cmake ..
+- make all
+- binary can be found in build/src/main
+
+## Controls
+
+**Key** | **Description**
+-----|------
+Tab | toogle between 3D / 2D
+w/s/a/d | camera movement in 3D
+
+Different simulation parts can be changed on top "General" Bar (Current Display)
+
+A detailed description of all parameters will be added soon.
+
+## Further plans
+
+- More simulations (like water temperature or global water movements)
+- Direct manipulation (like adding water on a specific place)
+- Faster Plate tectonic(via Shaders, faster but less accurate)
+- More manipulation options
+- a config file for startup parameters
+
+## Credits
+- Maxis SimEarth where i got the original idea
+- original platec developer Lauri Viitanen ( http://sourceforge.net/projects/platec/ )
+- water errosion is heavily inspired by https://github.com/pyalot/craftscape
+- some ideas are taken from https://github.com/Mindwerks/worldengine
+- a lot of world generation tools out there, where i got a lot of interessting ideas
+
