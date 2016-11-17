@@ -31,6 +31,9 @@
 #include "plane.h"
 #include "inputHandler.h"
 #include "simulation.h"
+#include <chrono>
+#include <future>
+
 class display3D 
 {
 public:
@@ -54,7 +57,7 @@ private:
     std::shared_ptr<Shadows> shadows;
     std::shared_ptr<Light> light;
     std::shared_ptr<plane> terrainPlain;
- 
+    std::chrono::time_point<std::chrono::steady_clock> buttonWait; 
     bool render3D = true;
     glm::dvec2 prevMousePosition = glm::dvec2(0.0);
     glm::ivec2 windowDimension;

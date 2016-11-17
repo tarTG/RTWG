@@ -14,6 +14,8 @@
 
 
 #include <AntTweakBar.h>
+#include <chrono>
+#include <future>
 
 #include "display3D.h"
 #include "simpleRender.h"
@@ -94,6 +96,9 @@ void display3D::handleCameraInput(GLFWwindow* window)
 {
         glm::dvec2 newpos;
         glfwGetCursorPos(window, &newpos.x, &newpos.y);
+        
+
+        
     if(glfwGetKey(window,GLFW_KEY_LEFT_SHIFT)== GLFW_PRESS)
     {
         camera->MoveHead((prevMousePosition.x -newpos.x)*-0.01,(prevMousePosition.y-newpos.y)*0.01);
@@ -115,10 +120,15 @@ void display3D::handleCameraInput(GLFWwindow* window)
         {
             camera->MoveZ(0.7);
         }          
-        if(glfwGetKey(window,GLFW_KEY_TAB) == GLFW_PRESS)
-         {
-            render3D = !render3D;
+        //ugly workaround for bug in GLFW3
+        if(glfwGetKey(window,GLFW_KEY_TAB) == GLFW_PRESS && ((std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - buttonWait)).count() > 200))
+        {
+                buttonWait = std::chrono::steady_clock::now() ;
+                render3D = !render3D;
+
         }
+
+       
 }
 
 bool display3D::isRender3D() const

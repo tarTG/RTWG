@@ -151,7 +151,7 @@ void simulation::initLithosphere(float sea_level, float _folding_ratio, uint32_t
 }
 GLuint simulation::getTextureID(const DataType type)
 {
-    return v_texData.at(type).getSourceTexture();
+    return v_texData.at(std::min(type,DataType::CLIMAT)).getSourceTexture();
 }
 
 

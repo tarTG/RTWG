@@ -23,16 +23,9 @@ uniform float DayNightFactor = 1.0;
 
 out vec3 color;
 
-
 vec3 getTexValue(sampler2D tex, float x, float y)
 {
-    vec2 absCorrd = vec2(gl_FragCoord.xy+vec2(x,y));
-    float yCoord = clamp(absCorrd.y,0.0,float(textureSize(tex,0).y));
-    float xCoord = absCorrd.x;
-    if(absCorrd.y>textureSize(tex,0).y||absCorrd.y < 0.0)
-        xCoord= abs(textureSize(tex,0).x-abs(absCorrd.x));
-
-    return texture2D(tex,fract(vec2(xCoord,yCoord)/ textureSize(tex,0))  ).xyz;
+    return texture2D(tex, fract((gl_FragCoord.xy+vec2(x,y))/textureSize(tex,0))).xyz;
 }
 
 float getGround(float x, float y)
