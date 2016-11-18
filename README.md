@@ -41,6 +41,23 @@ Different simulation parts can be changed on top "General" Bar (Current Display)
 
 A detailed description of all parameters will be added soon.
 
+## Example images
+
+Here is an example that is generated throught this tool.
+
+### Heigthmap
+
+![](screenshots/heightmap.png?raw=true)
+
+### Climate zones
+
+![](screenshots/Climat.png?raw=true)
+
+### 3D representation
+
+![](screenshots/3DMap.png?raw=true)
+
+
 ## Further plans
 
 - More simulations (like water temperature or global water movements)
