@@ -7,11 +7,11 @@ This is the result of my Masterthesis on the University of Applied Sciences in R
 ## Features
 
 - Start world is generated thought prozedural algorithmen or imported heightmap
-- Realtime simulation and manipulation of water, wind, soil, moist, ice, plate-tectonic, temperature and their resulting climat zones
+- Realtime simulation and manipulation of water, wind, soil, moist, ice, plate-tectonic, temperature and the resulting climate zones
 - 2D and 3D representation
 - PNG Export of all data
 
-## Reqirements
+## Requirements
 
 - OpenGL 4.+
 - a C++14 compiler
@@ -37,7 +37,7 @@ w/s/a/d | camera movement in 3D
 Shift + Mouse | camera movement in 3D
 
 
-Different simulation parts can be changed on top "General" Bar (Current Display)
+Simulation view can be changed on top "General" Bar (Current Display)
 
 A detailed description of all parameters will be added soon.
 
