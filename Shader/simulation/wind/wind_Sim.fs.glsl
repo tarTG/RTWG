@@ -29,7 +29,7 @@ out vec3 color;
 
 float getNoiseValue(vec2 coord)
 {
-    return (texture2D(noiseTex,((gl_FragCoord.xy )/textureSize(noiseTex,0)+coord)+vec2(sign((gl_FragCoord.y/textureSize(noiseTex,0).y)-0.5)*timeFactorWind,0.0)).x * 2) -1;
+    return (texture2D(noiseTex,((gl_FragCoord.xy )/textureSize(noiseTex,0)+coord)+vec2(sign((gl_FragCoord.y/textureSize(noiseTex,0).y)-0.5)*(timeFactorWind*0.001),0.0)).x * 2) -1;
 }
 
 vec3 getTexValue(sampler2D tex, float x, float y)
