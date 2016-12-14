@@ -40,7 +40,8 @@ u_int32_t simpleRender::init()
     }
     //set context to window
     glfwMakeContextCurrent(window);
-        
+            glfwSwapInterval(0);
+
     if(gl3wInit() !=  0)   //init gl3w
     {
         glfwTerminate();
