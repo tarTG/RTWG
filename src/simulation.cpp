@@ -93,13 +93,14 @@ void simulation::initGUIElements()
     twDisplay = TwDefineEnum("SeasonType", twdisplayEnum, 9);
     parameterBar = inputHandler::createNewBar("Parameters","position='8 8' size='200 500'"); 
     activationBar = inputHandler::createNewBar("Activation","position='208 8' size='200 400'"); 
-    general = inputHandler::createNewBar("General","position='408 8' size='200 400'"); 
+    general = inputHandler::createNewBar("General","position='408 8' size='200 130'"); 
     
     TwAddVarRW(general, "Current Display", twDisplay, &currentDisplay, NULL);
 
    TwAddButton(general,"Restart",[](void *clientData){static_cast<simulation*>(clientData)->restart();},this,"help='Restart this world.'  ");
    TwAddButton(general,"New World",[](void *clientData){static_cast<simulation*>(clientData)->newWorld();},this,"help='Create a new World.'  ");
-   TwAddButton(general,"Export",[](void *clientData){static_cast<simulation*>(clientData)->saveTextures();},this,"help='Export all textures.'  ");   
+   TwAddButton(general,"Export",[](void *clientData){static_cast<simulation*>(clientData)->saveTextures();},this,"help='Export all textures.'  ");  
+   TwAddVarRW(general,"Pause all", TW_TYPE_BOOLCPP,&this->pause,"help='Pause the simulation' ");
 }
 
 void simulation::initLithosphere(float sea_level, float _folding_ratio, uint32_t aggr_ratio_abs, float aggr_ratio_rel, uint32_t _max_plates, float terrainNoiseRoughness)
@@ -157,6 +158,8 @@ GLuint simulation::getTextureID(const DataType type)
 
 void simulation::update()
 {
+    if(pause)
+        return;
     glViewport(0,0,textureWidth,textureHeight);
     glBindVertexArray(vao);
             glActiveTexture(GL_TEXTURE8);

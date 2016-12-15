@@ -33,7 +33,7 @@ float getGround(float x, float y)
 {
     float g2 = getTexValue(rock,x, y).x;
     vec3 l2 = getTexValue(soil, x, y);
-    float change = ( (g2+l2.x)-(g1+l1.x))*0.25 ;
+    float change = ( (g2+l2.x)-(g1+l1.x))*0.125 ;
    change = clamp(change, -l1.x/2.0, l2.x/2.0)*0.08;
     return change;
 }

@@ -28,8 +28,8 @@ int main(int argc, char** argv)
 {
     float frameTime; //current frame time
     bool enable_tectonic = true; //bool for enabling/disabling tectonic
-    int windowWidth = 400, windowHeight= 300; //start values for window dimensions
-    int textureWidth = 3840, textureHeight= 2160; 
+    int windowWidth = 1024, windowHeight= 600; //start values for window dimensions
+    int textureWidth = 1600, textureHeight= 900; 
     srand(time(NULL)); //initialize random number generator
 
     //generate a new lithosphere.

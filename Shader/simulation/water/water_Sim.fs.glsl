@@ -79,7 +79,7 @@ void main(void)
 
 
         result.x -= mix(0.0000,0.000007,evaporate*(temperature+2 ));
-        result.x += mix(0.0000,0.000028, rain* getTexValue(moist, 0, 0).x);
+        result.x += mix(0.0000,0.000022, rain* getTexValue(moist, 0, 0).x);
         result.x += getTexValue(ice, 0.0, 0.0).y*0.01;
             
 

@@ -76,6 +76,7 @@ private:
     bool enable_tectonic = false; //bool for enabling/disabling tectonic
     float tectonicSeaLevel,terrainNoiseRoughness;
     float lastSeaLevel;
+    bool pause = false;
     
 
 

@@ -39,9 +39,9 @@ void display3D::init()
     waterRender =  std::make_shared<WaterRender>(terrainPlain,textureDimension);
     light = std::make_shared<Light>( 0,glm::vec3(0),glm::vec3(40));
     
-    Bar3D = inputHandler::createNewBar("3DConrtols","position='608 8' size='200 400'");
-    TwAddVarRW(Bar3D,"Light Position",TW_TYPE_DIR3F,&(light->getCurrentData().Position),"");
-    TwAddVarRW(Bar3D,"Light Color",TW_TYPE_COLOR3F,&(light->getCurrentData().Color),"");    
+    Bar3D = inputHandler::createNewBar("3DConrtols","position='608 8' size='200 200'");
+    TwAddVarRW(Bar3D,"Light Position",TW_TYPE_DIR3F,&(light->getCurrentData().Position),"opened='true'");
+   // TwAddVarRW(Bar3D,"Light Color",TW_TYPE_COLOR3F,&(light->getCurrentData().Color),"");    
     TwAddVarRW(Bar3D,"Height Factor",TW_TYPE_FLOAT,&(heightFactor)," min=0.1 max = 6.0 step = 0.1" ); 
     
      glBindVertexArray(terrainPlain->getVao_plane());
