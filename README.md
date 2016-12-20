@@ -37,7 +37,7 @@ Shift + Mouse | camera movement in 3D
 
 Simulation view can be changed on top "General" Bar (Current Display)
 
-A detailed description of all parameters will be added soon.
+A detailed description of all parameters can be found in the [wiki](https://github.com/tarTG/RTWG/wiki).
 
 ## Example images
 
