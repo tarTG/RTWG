@@ -20,13 +20,11 @@ This is the result of my Masterthesis on the University of Applied Sciences in R
 ## Installation
 
 - go to the RTWG folder
-- submodule update --init --recursive
-- sudo scipts/installDependencies.sh
-- mkdir build
-- cd build
-- cmake ..
-- make all
-- binary can be found in build/src/main
+- sudo sh install.sh
+- start the program with run.sh
+
+If you start the program, you have to wait for a short time, until the  heightmap is generated.
+
 
 ## Controls
 

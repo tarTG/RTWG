@@ -48,11 +48,13 @@ void main()
     color = texture2D(rock, (gl_FragCoord.xy)/textureSize(rock,0)).x; //get height
    color -= getTexValue(soil,0,0).y ;   //subtract new generated soil
 
-
+    if(threm_factor > 0.0)
+    {
         color += thermal_erosion(color, 0.0, 1.0) + thermal_erosion(color, 0.0, -1.0);
         color += thermal_erosion(color, 1.0, 0.0) + thermal_erosion(color, - 1.0, 0.0);
         color += (thermal_erosion(color, 1.0, 1.0) + thermal_erosion(color, - 1.0, 1.0))*0.25;
         color += (thermal_erosion(color, 1.0, -1.0) + thermal_erosion(color, - 1.0, - 1.0))*0.25;
+    }
      
 
 
