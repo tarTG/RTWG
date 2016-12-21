@@ -4,6 +4,10 @@
 The Real-Time World Generation project aims to provide a tool for world/terrain generation based on procedural algorithms and cellular automata simulation.
 This is the result of my Masterthesis on the University of Applied Sciences in Rosenheim. The Thesis will be added, when its done.
 
+## Demo Video
+
+[![screenshots/3DMap.png](http://img.youtube.com/vi/lntbdItSFtg/0.jpg)](http://www.youtube.com/watch?v=lntbdItSFtg)
+
 ## Features
 
 - Start world is generated thought prozedural algorithmen or imported heightmap
