@@ -49,8 +49,7 @@ void main() {
 
     vec3 w = getTexValue(water, 0.0, 0.0);
 
-     float erroded = (length(w.yz)*0.00004 * errodeFactor)/(w.x+0.001);
-        erroded /= 1.0 + g.x*300.0;
+     float erroded = (length(w.yz)*0.00004 * errodeFactor)/(w.x+0.001+ g.x);
         erroded = clamp(erroded,0.0,g1.x);
         g.y = erroded;
         g.x += erroded;
