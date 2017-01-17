@@ -46,9 +46,9 @@ float getGround(float x, float y)
 float calculatePressure(vec2 dir)
 {
     float pressure = (-getTexValue(temp,dir.x, dir.y).x +1.0) + 1.0-( getTexValue(moist,dir.x, dir.y).x ) ;
-    pressure -= 1/(getGround(dir.x, dir.y).x + getTexValue(water,dir.x, dir.y).x) *15;
+    pressure = 1/(getGround(dir.x, dir.y).x  + getTexValue(water,dir.x, dir.y).x)*5 ;
     
-    return pressure/3;
+    return pressure;
 }
 
 vec2 getWindDirection(vec2 dir, float curPressure, float dirPressure)
