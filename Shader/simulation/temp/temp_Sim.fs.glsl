@@ -68,7 +68,7 @@ void main()
     float waterheight = getTexValue(water,0.0,0.0).x;
 
     if(heigth > heightCooldown)
-        temperature -= mix(0.0,3.0,heigth*0.4); 
+        temperature -= 1.2 * heigth; 
 
        
 
