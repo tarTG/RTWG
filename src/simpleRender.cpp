@@ -16,12 +16,12 @@
 
 
 
-simpleRender::simpleRender(u_int32_t windowLength, uint32_t windowHeight, std::string windowTitle) :
+simpleRender::simpleRender(uint32_t windowLength, uint32_t windowHeight, std::string windowTitle) :
 windowHeight(windowHeight),windowLength(windowLength), windowTitle(windowTitle)
 {
 }
 
-u_int32_t simpleRender::init() 
+uint32_t simpleRender::init() 
 {
     if (!glfwInit()) //try to init glfw
           return 1;

@@ -31,12 +31,12 @@ public:
      * @param windowHeight - height of the window
      * @param windowTitle - titel of the window
      */
-    simpleRender(u_int32_t windowLength, uint32_t windowHeight,std::string windowTitle);
+    simpleRender(uint32_t windowLength, uint32_t windowHeight,std::string windowTitle);
     
     /**
      * initialize GLFW, GL3W, OpenGL context and window
      */
-    u_int32_t init();
+    uint32_t init();
     
     /**
      * clear content of the window
@@ -62,7 +62,7 @@ public:
 
 
 private:
-        u_int32_t windowHeight,windowLength; //window dimensions
+        uint32_t windowHeight,windowLength; //window dimensions
     std::string windowTitle; //window title
     GLFWwindow* window; //window refrence
 };
