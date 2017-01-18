@@ -56,7 +56,7 @@ void main()
     }
     else
     {
-        new_moist *= 0.4*mix(0.8,1.7,clamp(temperature,0.0,1.0)) ;
+        new_moist *= mix(0.3,0.7,clamp(temperature,0.0,1.0)) ;
         new_moist -=  landRemoveFactor*0.001;
     }
 
