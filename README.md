@@ -74,4 +74,3 @@ Here is an example that is generated throught this tool.
 - water errosion is heavily inspired by https://github.com/pyalot/craftscape
 - some ideas are taken from https://github.com/Mindwerks/worldengine
 - a lot of world generation tools out there, where i got a lot of interessting ideas
-
