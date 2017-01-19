@@ -39,11 +39,11 @@ const vec3 Color_Tropical_dry_forest              = vec3(0.5,1.0,0.5);
 const vec3 Color_Tropical_moist_forest            = vec3(0.37,1.0,0.5);
 const vec3 Color_Tropical_wet_forest              = vec3(0.25,1.0,0.56);
 const vec3 Color_Tropical_rain_forest             = vec3(0.125,1.0,0.62);
-const vec3 Color_Ocean                            = vec3(0.0,0.0,0.5);
+const vec3 Color_Ocean                            = vec3(0.0,0.0,0.4);
 const vec3 Color_River                            = vec3(0.0,0.4,0.8);
 const vec3 Color_Sand                             = vec3(0.0,0.0,0.0);
 const vec3 Color_Rock                             = vec3(0.0,0.0,0.0);
-const vec3 Color_Lake                             = vec3(0.0,0.0,0.7);
+const vec3 Color_Lake                             = vec3(0.0,0.0,0.8);
 
 
 const uint  alpine = 1;
@@ -175,9 +175,9 @@ void main()
         value = Color_Polar_desert;
     }
 
-    else if(getTexValue(water, 0.0,0.0).x > 0.03)
+    else if(getTexValue(water, 0.0,0.0).x > 0.1)
     {
-        if(getGround(0.0,0.0) < 0.4)
+        if(getGround(0.0,0.0) < 0.2)
         {
             value = Color_Ocean;
         
