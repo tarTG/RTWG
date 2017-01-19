@@ -50,10 +50,10 @@ void main()
     float ground =  getGround(0,0);
     float melt = 0.0;
     if((temperature < iceTemperature))
-        newIce += mix(0.002,0.007,abs(temperature));
+        newIce += mix(0.002,0.007,temperature+1);
     else
     {
-        newIce -= mix(0.002,0.007,abs(temperature));
+        newIce -= mix(0.002,0.007,temperature+1);
          melt = clamp(abs(clamp(newIce,0.0,1.0)-getTexValue(ice,0,0).x),0.0,1.0);
       }
 
