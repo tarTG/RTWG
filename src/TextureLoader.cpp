@@ -180,43 +180,6 @@ GLuint TextureLoader::generateNoiseTexture(const int width, const int lenght,con
     return noiseID;
 }
 
-ILuint TextureLoader::load2DTexture(const std::string& fileName, const ILint INcolorFormat, const ILint INvalueFormat)
-{
-   ILuint imgID =0;                                  //id of the image
-   ilInit(); //init DevIL
-   ilGenImages(1,&imgID);       //generate image ID
-   ilBindImage(imgID);         //bind Image
-
-   
-   if(ilLoadImage(fileName.c_str())) //try to load image
-   {
-        ilEnable(IL_ORIGIN_SET);    
-        ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
-        iluFlipImage();
-
-        if(!ilConvertImage(INcolorFormat,INvalueFormat))
-        {
-            std::stringstream s;        
-            s <<"Could not convert texture " << fileName.c_str();
-            std::cout  << s.str()<< std::endl;
-            return 0; 
-        }
-
-         
-    }
-    else //if image loading didn't work. print error
-    {
-        std::stringstream s;        
-        s <<"Could not load texture " << fileName.c_str();
-        std::cout  << s.str()<< std::endl;
-       return 0;  //convert image
-
-    }                    
-
-    return imgID;
-}
-
-
 
 ILuint TextureLoader::SaveTexture(ILuint Width, ILuint Height, std::string FileName, ILuint Texture)
 {

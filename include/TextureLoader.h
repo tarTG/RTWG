@@ -27,7 +27,6 @@ public:
     static GLuint load2DTexture(const std::string& fileName, const GLuint OUTcolorFormat, const GLuint OUTvalueFormat,
                                                                 const ILint INcolorFormat, const ILint INvalueFormat);
     
-    static ILuint load2DTexture(const std::string& fileName, const ILint INcolorFormat, const ILint INvalueFormat);
     
     static GLuint loadEmpty2DTexture(const int width, const int height, const GLuint OUTcolorFormat, const GLuint OUTvalueFormat, const GLuint interplolation = GL_NEAREST);    
     
