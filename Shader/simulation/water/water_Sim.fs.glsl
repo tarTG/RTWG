@@ -92,7 +92,7 @@ void main(void)
         )*0.98*(1.0/(300.0+1.4*4.0+4.0));   
     
 
-    result.yz = clamp(  result.yz,vec2(-1.0),vec2(1.0));
+   // result.yz = clamp(  result.yz,vec2(-1.0),vec2(1.0));
     result.x =  clamp(  result.x,sea_level -ground,10.0);
 
 

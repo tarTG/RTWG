@@ -58,7 +58,7 @@ void simulation::init()
     
     //init wind 
     v_texData.at(WIND) = RendToTex(std::string(SHADER_PATH )  + "simulation/wind/wind_Sim",textureWidth,textureHeight,GL_RGB);
-    v_texData.at(WIND).setUniforms({{1.0,"distorsionFaktor"},{1.0,"globelWindFaktor"},{1.0,"localPressureFaktor"},{0.0,"timeFactorWind"},{0.001,"windspeed"},{0.6,"windNoiseRoughness"},{2,"windNoiseTurbulence"}});
+    v_texData.at(WIND).setUniforms({{1.0,"distorsionFaktor"},{1.0,"globelWindFaktor"},{1.0,"localPressureFaktor"},{0.0,"timeFactorWind"},{0.001,"windspeed"},{1.1,"windNoiseRoughness"},{4,"windNoiseTurbulence"}});
     v_texData.at(WIND).generateParameterBar(parameterBar,"Wind",{"min=-2.0 max=2.0 step=0.1","min=-2.0 max = 2.0 step = 0.1","min=-2.0 max = 2.0 step = 0.1","visible=false","min=-1.0 max = 1.0 step = 0.001","min=0.0 max = 8.0 step = 0.1","min=1 max = 20 step = 1"});
     v_texData.at(WIND).generateActivationBar(activationBar,"Wind");   
     windNoiseID = TextureLoader::generateNoiseTexture(textureWidth, textureHeight,rand(),v_texData.at(WIND).getParameterValue("windNoiseRoughness"),v_texData.at(WIND).getParameterValue("windNoiseTurbulence"));
