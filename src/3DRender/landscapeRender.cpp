@@ -28,7 +28,7 @@ void landscapeRender::render(std::shared_ptr<Camera> camera, std::shared_ptr<Sha
    glUseProgram(displayProgram);
 
     glUniformMatrix4fv(glGetUniformLocation(displayProgram, "model_matrix"),1,GL_FALSE,glm::value_ptr( terrainPlain->getModel_matrix()  ));
-    glUniformMatrix4fv(glGetUniformLocation(displayProgram, "mv_matrix"),1,GL_FALSE,glm::value_ptr(  terrainPlain->getModel_matrix()  * camera->getView() ));
+    glUniformMatrix4fv(glGetUniformLocation(displayProgram, "mv_matrix"),1,GL_FALSE,glm::value_ptr(   camera->getView() *terrainPlain->getModel_matrix() ));
     glUniformMatrix4fv(glGetUniformLocation(displayProgram, "proj_matrix"),1,GL_FALSE,glm::value_ptr(camera->getProjection()    ));   
     glUniform3fv(glGetUniformLocation(displayProgram, "light_pos"),1,glm::value_ptr(light->getCurrentData().Position ));
     glUniform3fv(glGetUniformLocation(displayProgram, "light_color"),1,glm::value_ptr(light->getCurrentData().Color ));

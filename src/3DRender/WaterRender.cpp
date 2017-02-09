@@ -66,7 +66,7 @@ void WaterRender::render(std::shared_ptr<Camera> camera, std::shared_ptr<Shadows
     glUniformMatrix4fv(glGetUniformLocation(waterProgram,"shadowMVP"), 1, GL_FALSE,
                        glm::value_ptr(shadows->getBiasedDepthMVP()));
         glUniformMatrix4fv(glGetUniformLocation(waterProgram, "model_matrix"),1,GL_FALSE,glm::value_ptr( transform ));
-        glUniformMatrix4fv(glGetUniformLocation(waterProgram, "mv_matrix"),1,GL_FALSE,glm::value_ptr( transform  * camera->getView() ));
+        glUniformMatrix4fv(glGetUniformLocation(waterProgram, "mv_matrix"),1,GL_FALSE,glm::value_ptr(  camera->getView()* transform   ));
         glUniformMatrix4fv(glGetUniformLocation(waterProgram, "proj_matrix"),1,GL_FALSE,glm::value_ptr(camera->getProjection()    ));   
         glUniform3fv(glGetUniformLocation(waterProgram, "light_pos"),1,glm::value_ptr(light->getCurrentData().Position ));
         glUniform3fv(glGetUniformLocation(waterProgram, "light_color"),1,glm::value_ptr(light->getCurrentData().Color ));

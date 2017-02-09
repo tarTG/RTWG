@@ -55,8 +55,8 @@ glm::vec3 plane::getScale() const
 
 void plane::setScale(const glm::vec3 scale)
 {
-    scaleMat = glm::scale(glm::mat4(1.0f), scale / scaleVec);
-    model_matrix = model_matrix* scaleMat;
+    scaleMat = glm::scale(model_matrix, scale / scaleVec);
+    model_matrix =  scaleMat;
     scaleVec = scale;
 }
 

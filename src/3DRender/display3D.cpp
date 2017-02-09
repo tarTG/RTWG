@@ -50,7 +50,8 @@ void display3D::init()
     shadows->init(std::string(SHADER_PATH) +  "display/3D/Shadow");
     waterRender->init(std::string(SHADER_PATH) +  "display/3D/waterDispmap",std::string(RESOURCES_PATH) + "grass_normals.png",Bar3D);
      glBindVertexArray(0);
-     
+    TwAddVarCB(Bar3D,"Terrain Scaling",TW_TYPE_FLOAT,[](const void *value, void *clientData){ static_cast<plane*>(clientData)->setScale(glm::vec3(*(static_cast<const float*>(value))));},
+            []( void *value, void *clientData){ *(static_cast< float*>(value)) = static_cast<plane*>(clientData)->getScale().x;},terrainPlain.get(),"min=0.1 max = 30.0 step = 0.1"  );
 
 }
 
