@@ -36,7 +36,7 @@ public:
 
     void init(const std::string& shaderPath);
     
-    void render(std::shared_ptr<Camera> camera, std::shared_ptr<Shadows> shadow,std::shared_ptr<Light> light,const uint32_t currentDisplay, float heightFactor);
+    void render(std::shared_ptr<Camera> camera, std::shared_ptr<Shadows> shadow,std::shared_ptr<Light> light,const uint32_t currentDisplay);
     
     void exit();
     

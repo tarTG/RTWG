@@ -33,7 +33,7 @@ public:
 
     void init(const std::string& shaderPath);
     void exit();
-    void render(const float heightFactor,const glm::vec3& lightPosition);
+    void render(const glm::vec3& lightPosition);
     
     const glm::mat4 getBiasedDepthMVP();
     

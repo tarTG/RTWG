@@ -16,7 +16,6 @@ uniform mat4 depthMVP; //model view matrix
 uniform mat4 model_matrix;
 
 
-uniform float heightFactor = 1.0;
 
 in vec2 texCoordT[];
 out vec2 texcoordF;
@@ -49,7 +48,7 @@ void main()
     vec3 p_2 = mix(p2, p3, u);
 
     vec3 q =mix(p_2, p_1, v) ;
-    q.y = texture(rock,texcoordF).x * heightFactor;  
+    q.y = texture(rock,texcoordF).x;  
 
 
  

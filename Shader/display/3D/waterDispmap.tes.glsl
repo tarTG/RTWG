@@ -18,7 +18,6 @@ uniform vec3 light_pos = vec3(0.0, 0.0,0.0);
 uniform mat4 model_matrix;
 uniform mat4 shadowMVP;
 
-uniform float heightFactor = 1.0;
 
 in vec2 texCoordT[];
 out vec2 texcoordF;
@@ -43,10 +42,10 @@ float height(vec2 coord)
 vec3 calcNormal (vec2 tCoord, vec2 dist)
 {
     vec2 p = 1.0/textureSize(rock,0);
-    vec3 v1 = vec3(0.0, height(tCoord + (p*vec2(0.0,-1.0))) * heightFactor, p.y*-1.0);
-    vec3 v2 = vec3(p.x*1.0, height(tCoord + (p*vec2(1.0,0.0))) * heightFactor, 0.0);
-    vec3 v3 = vec3(0.0, height(tCoord + (p*vec2(0.0,1.0)))  * heightFactor, p.y*1.0);
-    vec3 v4 = vec3(p.x*-1.0, height(tCoord + (p*vec2(-1.0,0.0))) * heightFactor, 0.0);
+    vec3 v1 = vec3(0.0, height(tCoord + (p*vec2(0.0,-1.0))) , p.y*-1.0);
+    vec3 v2 = vec3(p.x*1.0, height(tCoord + (p*vec2(1.0,0.0))) , 0.0);
+    vec3 v3 = vec3(0.0, height(tCoord + (p*vec2(0.0,1.0))) , p.y*1.0);
+    vec3 v4 = vec3(p.x*-1.0, height(tCoord + (p*vec2(-1.0,0.0))), 0.0);
     return normalize(normalize(cross(v1,v2))+normalize(cross(v2,v3))+normalize(cross(v3,v4))+normalize(cross(v4,v1)));
 
 }
@@ -82,7 +81,7 @@ void main()
     position = vec4(q,1.0);
 
 
-        q.y = (height(texcoordF) * heightFactor);  
+        q.y = (height(texcoordF) );  
 
    shadowCoord =     (shadowMVP *model_matrix)   * vec4(q,1.0) ;
  

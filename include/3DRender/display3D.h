@@ -64,8 +64,6 @@ private:
     glm::ivec2 textureDimension;
     GLuint  vao;
     TwBar* Bar3D;
-    float heightFactor = 1.0;
-
 };
 
 #endif /* DISPLAY3D_H */

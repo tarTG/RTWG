@@ -23,7 +23,7 @@ void landscapeRender::init(const std::string& shaderPath)
     displayProgram = ShaderLoader::generateProgram(shaderPath);
 }
 
-void landscapeRender::render(std::shared_ptr<Camera> camera, std::shared_ptr<Shadows> shadow,std::shared_ptr<Light> light,const uint32_t currentDisplay, float heightFactor)
+void landscapeRender::render(std::shared_ptr<Camera> camera, std::shared_ptr<Shadows> shadow,std::shared_ptr<Light> light,const uint32_t currentDisplay)
 {
    glUseProgram(displayProgram);
 
@@ -37,8 +37,6 @@ void landscapeRender::render(std::shared_ptr<Camera> camera, std::shared_ptr<Sha
 
    glUniform2iv(glGetUniformLocation(displayProgram, "dimensions"),1,glm::value_ptr(terrainPlain->getPlaneDimension()));
     glUniformMatrix4fv(glGetUniformLocation(displayProgram,"shadowMVP"), 1, GL_FALSE, glm::value_ptr(shadow->getBiasedDepthMVP()));
-
-   glUniform1f(glGetUniformLocation(displayProgram, "heightFactor"),heightFactor);
 
    glActiveTexture(GL_TEXTURE8);
     glBindTexture(GL_TEXTURE_2D, shadow->getDepthTexture());

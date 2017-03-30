@@ -41,7 +41,7 @@ void WaterRender::init(const std::string& shaderPath, const std::string& normalT
 }
 
 
-void WaterRender::render(std::shared_ptr<Camera> camera, std::shared_ptr<Shadows> shadows,std::shared_ptr<Light> light, const float time , const float heightFactor)
+void WaterRender::render(std::shared_ptr<Camera> camera, std::shared_ptr<Shadows> shadows,std::shared_ptr<Light> light, const float time)
 {
     
     glViewport(0.0,0.0,textureDimension.x,textureDimension.y);
@@ -73,9 +73,7 @@ void WaterRender::render(std::shared_ptr<Camera> camera, std::shared_ptr<Shadows
 
         
     glUniform1f(glGetUniformLocation(waterProgram, "waterSpeed"),5.0);
-     
-   glUniform1f(glGetUniformLocation(waterProgram, "heightFactor"),heightFactor);
- 
+      
    glActiveTexture(GL_TEXTURE8);
     glBindTexture(GL_TEXTURE_2D, shadows->getDepthTexture());
 
