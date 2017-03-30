@@ -41,7 +41,7 @@ void WaterRender::init(const std::string& shaderPath, const std::string& normalT
 }
 
 
-void WaterRender::render(std::shared_ptr<Camera> camera, std::shared_ptr<Shadows> shadows,std::shared_ptr<Light> light, const float time , const float heightFactor)
+void WaterRender::render(std::shared_ptr<Camera> camera, std::shared_ptr<Shadows> shadows,std::shared_ptr<Light> light, const float time)
 {
     
     glViewport(0.0,0.0,textureDimension.x,textureDimension.y);
@@ -66,16 +66,14 @@ void WaterRender::render(std::shared_ptr<Camera> camera, std::shared_ptr<Shadows
     glUniformMatrix4fv(glGetUniformLocation(waterProgram,"shadowMVP"), 1, GL_FALSE,
                        glm::value_ptr(shadows->getBiasedDepthMVP()));
         glUniformMatrix4fv(glGetUniformLocation(waterProgram, "model_matrix"),1,GL_FALSE,glm::value_ptr( transform ));
-        glUniformMatrix4fv(glGetUniformLocation(waterProgram, "mv_matrix"),1,GL_FALSE,glm::value_ptr( transform  * camera->getView() ));
+        glUniformMatrix4fv(glGetUniformLocation(waterProgram, "mv_matrix"),1,GL_FALSE,glm::value_ptr(  camera->getView()* transform   ));
         glUniformMatrix4fv(glGetUniformLocation(waterProgram, "proj_matrix"),1,GL_FALSE,glm::value_ptr(camera->getProjection()    ));   
         glUniform3fv(glGetUniformLocation(waterProgram, "light_pos"),1,glm::value_ptr(light->getCurrentData().Position ));
         glUniform3fv(glGetUniformLocation(waterProgram, "light_color"),1,glm::value_ptr(light->getCurrentData().Color ));
 
         
     glUniform1f(glGetUniformLocation(waterProgram, "waterSpeed"),5.0);
-     
-   glUniform1f(glGetUniformLocation(waterProgram, "heightFactor"),heightFactor);
- 
+      
    glActiveTexture(GL_TEXTURE8);
     glBindTexture(GL_TEXTURE_2D, shadows->getDepthTexture());
 

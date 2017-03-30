@@ -36,7 +36,7 @@ public:
 
     void init(const std::string& shaderPath,const std::string& normalTexturePath, TwBar* Bar3d);
     
-    void render(std::shared_ptr<Camera> camera, std::shared_ptr<Shadows> shadows, std::shared_ptr<Light> light, const float time,const float heightFactor);
+    void render(std::shared_ptr<Camera> camera, std::shared_ptr<Shadows> shadows, std::shared_ptr<Light> light, const float time);
     
     void exit();
     

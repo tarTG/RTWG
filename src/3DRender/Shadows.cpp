@@ -49,7 +49,7 @@ void Shadows::init(const std::string& shaderPath)
     glBindVertexArray(0);
 }
 
-void Shadows::render(const float heightFactor,const glm::vec3& lightPosition)
+void Shadows::render(const glm::vec3& lightPosition)
 {
     glBindFramebuffer(GL_FRAMEBUFFER,depthFBO);
      glCullFace(GL_FRONT);
@@ -62,7 +62,7 @@ void Shadows::render(const float heightFactor,const glm::vec3& lightPosition)
 
 
     glUniform2iv(glGetUniformLocation(shaderID, "dimensions"),1,glm::value_ptr(terrainPlain->getPlaneDimension()));
-    glUniform1f(glGetUniformLocation(shaderID, "heightFactor"),heightFactor);
+
     
     
      depthMVP = glm::ortho(-30.0f, 30.0f, -30.0f, 30.0f, -100.0f, 20000.0f)

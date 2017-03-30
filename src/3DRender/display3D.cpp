@@ -42,7 +42,6 @@ void display3D::init()
     Bar3D = inputHandler::createNewBar("3DControls","position='608 8' size='200 200'");
     TwAddVarRW(Bar3D,"Light Position",TW_TYPE_DIR3F,&(light->getCurrentData().Position),"opened='true'");
    // TwAddVarRW(Bar3D,"Light Color",TW_TYPE_COLOR3F,&(light->getCurrentData().Color),"");    
-    TwAddVarRW(Bar3D,"Height Factor",TW_TYPE_FLOAT,&(heightFactor)," min=0.1 max = 6.0 step = 0.1" ); 
     
      glBindVertexArray(terrainPlain->getVao_plane());
 
@@ -50,7 +49,10 @@ void display3D::init()
     shadows->init(std::string(SHADER_PATH) +  "display/3D/Shadow");
     waterRender->init(std::string(SHADER_PATH) +  "display/3D/waterDispmap",std::string(RESOURCES_PATH) + "grass_normals.png",Bar3D);
      glBindVertexArray(0);
-     
+    TwAddVarCB(Bar3D,"Terrain Scaling",TW_TYPE_FLOAT,[](const void *value, void *clientData){ static_cast<plane*>(clientData)->setScale(glm::vec3(*(static_cast<const float*>(value)),static_cast<plane*>(clientData)->getScale().y,*(static_cast<const float*>(value))));},
+            []( void *value, void *clientData){ *(static_cast< float*>(value)) = static_cast<plane*>(clientData)->getScale().x;},terrainPlain.get(),"min=0.1 max = 30.0 step = 0.1"  );
+    TwAddVarCB(Bar3D,"Terrain Height",TW_TYPE_FLOAT,[](const void *value, void *clientData){ static_cast<plane*>(clientData)->setScale(glm::vec3(static_cast<plane*>(clientData)->getScale().x,*(static_cast<const float*>(value)),static_cast<plane*>(clientData)->getScale().z));},
+            []( void *value, void *clientData){ *(static_cast< float*>(value)) = static_cast<plane*>(clientData)->getScale().y;},terrainPlain.get(),"min=0.1 max = 30.0 step = 0.1"  );
 
 }
 
@@ -67,11 +69,11 @@ void display3D::render(float frameTime,simulation* sim)
      glBindVertexArray(terrainPlain->getVao_plane());
     
     
-    shadows->render(heightFactor,light->getCurrentData().Position);
+    shadows->render(light->getCurrentData().Position);
     camera->setViewport(0.0,0.0,windowDimension.x,windowDimension.y);
     camera->loadViewPort();
-    landscaperender->render(camera,shadows,light,sim->getCurrentDisplay(),heightFactor);
-    waterRender->render(camera,shadows,light,frameTime,heightFactor);
+    landscaperender->render(camera,shadows,light,sim->getCurrentDisplay());
+    waterRender->render(camera,shadows,light,frameTime);
     
         glBindVertexArray(0);
         glClampColor(0x891A, GL_TRUE);
