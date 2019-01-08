@@ -2,7 +2,10 @@
 [![Build Status](https://travis-ci.org/tarTG/RTWG.svg?branch=master)](https://travis-ci.org/tarTG/RTWG)
 
 The Real-Time World Generation project aims to provide a tool for world/terrain generation based on procedural algorithms and cellular automata simulation.
-This is the result of my Masterthesis on the University of Applied Sciences in Rosenheim. The Thesis will be added, when its done.
+This is the result of my Masterthesis on the University of Applied Sciences in Rosenheim, which can be 
+
+**The thesis is available [here](https://opus4.kobv.de/opus4-hs-rosenheim/frontdoor/index/index/docId/2219)**
+
 
 ## Demo Video
 
